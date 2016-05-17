@@ -1,0 +1,76 @@
+- var displayRowCount = 3;
+- var displayColumnCount = 3;
+- var isNoMoreData = false;
+
+- var FEED_LIST_TYPE_HOT = 3;
+- var FEED_LIST_TYPE_HISTORY = 9;
+- var FEED_LIST_TYPE_RECOMMEND = 11;
+- var FEED_LIST_TYPE_LATEST = 6;
+- var current_type = FEED_LIST_TYPE_HISTORY;
+ .ym-g100
+    if feed_list && feed_list.length >= 3
+      - var index = 0;
+      - for (var row=0; row<displayRowCount; row++)              
+        .ym-grid.linearize-level-2
+        if index + displayColumnCount > feed_list.length
+          isNoMoreData = true;
+        else
+          - for (var column=0; column<displayColumnCount; column++)  
+            - var feed = feed_list[index];   
+            - index = index + 1;
+            - var avatar;
+            - var desc = "";
+            - var nick = "";
+            - var subDesc ="";
+            - var Length=feed.avatar.length;
+            if feed.opusDesc!=""
+              desc = feed.opusDesc;
+            if !feed.nickName
+              nick = feed.nickName;
+            if desc!=""
+              subDesc =getDescString(desc, nick);
+            else
+              subDesc ="暂无描述";
+            if feed.avatar.substring(Length-3,Length)=="jpg"
+              avatar = feed.avatar;
+            else
+              if feed.gender == false
+                avatar = '../img/female@2x.png';
+              else
+                avatar = '../img/man@2x.png';
+            .inner-div
+              .participant-div
+                a.icon-link(href='#')
+                  img#icon-img.img-rounded.icon-img.float-left(src='#{avatar}', alt='   icon')
+                div.msg
+                  div.info-name-detail
+                     a.name-link(href='#') #{feed.nickName}
+                  div.info-desc-detail
+                     span #{subDesc}
+              .img-div
+                a.image-link(href='/opus/#{feed.feedId}')
+                  img.image-show(src='#{feed.opusImage}' alt='#{feed.opusWord}' onload='load(this)')
+
+              .state-div
+                span.pub-time.float-left #{dateUtils.getTimeDisplayString(feed.createDate)}
+                span.operating-span.float-right
+                  img(src="img/flower.png" class="default-img")
+                  span.img-span #{getFeedFlowerTimes(feed.feedTimes)}
+                  img(src="img/comment.png" class="default-img")
+                  span.img-span #{getFeedCommentTimes(feed.feedTimes)}
+    .ym-g100
+      .page-div
+         if offset >= index
+           a(href="./?offset=#{offset-index}&limit=#{limit}" class="page-previous page-link" style="font-weight:bold;") <
+         a(href="./?offset=0&limit=#{limit}" class="page1 page-link") 1
+         a(href="./?offset=9&limit=#{limit}" class="page2 page-link") 2
+         a(href="./?offset=18&limit=#{limit}" class="page3 page-link") 3
+         a(href="./?offset=27&limit=#{limit}" class="page4 page-link") 4
+         a(href="./?offset=36&limit=#{limit}" class="page5 page-link") 5
+         a(href="./?offset=45&limit=#{limit}" class="page6 page-link") 6
+         a(href="./?offset=54&limit=#{limit}" class="page7 page-link") 7
+         a(href="./?offset=63&limit=#{limit}" class="page8 page-link") 8
+         a(href="./?offset=72&limit=#{limit}" class="page9 page-link") 9
+         a(href="./?offset=81&limit=#{limit}" class="page10 page-link") 10                 
+         if offset <= 72
+           a(href="./?offset=#{index+offset}&limit=#{limit}" class="page-next page-link") >

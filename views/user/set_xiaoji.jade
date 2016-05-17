@@ -1,0 +1,48 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span9
+                .hero-unit
+                    form.form-horizontal(method='post', action='./doSetUserXiaoji')
+                        div.control-group
+                            div.controls
+                                h2  设置用户小吉号码
+
+                        div.control-group
+                          - if (uid == null) 
+                            label.control-label(for="inputSendto") 发送给
+                            div.controls
+                                input#sendTo(type='text', placeHolder='用户ID', name='uid')
+                          - else
+                            label.control-label(for="inputSendto") 发送给
+                            div.controls
+                                textarea#id(rows="1", name='uid') #{uid}
+                        div.control-group                                
+                          - if (nickname != null)
+                            label.control-label(for="nickname") 昵称 
+                            div.controls
+                                textarea(rows="1", name='nickname') #{nickname}
+                          - else
+                            label.control-label(for="nickname") 昵称
+                            div.controls
+                                textarea(rows="1", name='nickname')
+                        div.control-group
+                            label.control-label(for="xiaoji") 小吉号码 
+                            div.controls
+                                textarea(rows="1",placeHolder='小吉号码', name='xiaoji')
+                        div.control-group
+                            div.controls
+                                input.btn-info(type='button', value=' 随 机 ') 
+                                input.btn-primary(type='submit', value=' 确 定 ')   
+            
+    include ../includes/foot    
+    include ../includes/script    

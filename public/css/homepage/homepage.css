@@ -1,0 +1,185 @@
+.tabs-list,.tabs-item{
+  display: inline;
+  list-style: none;
+  outline: none ;
+}
+.tabs-ul-div{
+  margin-left: 20%;
+}
+.ui-tabs .ui-tabs-nav li a{
+  padding: 5px 0px 0px 15px ;
+  margin-left: 5px ;
+}
+
+#ui-id-1,#ui-id-2,#ui-id-3,#ui-id-4{
+  background: #21ab8a ;
+  display: inline-block;
+  height: 31px;
+  padding-top: 5px;
+  width: 110px;
+  padding-left: 15px;
+  text-align: center;
+  font-size: 18px ;
+  word-spacing:16px;
+  letter-spacing:16px;
+  color: #FFFFFF;
+  border-top-left-radius:30px;
+  border-top-right-radius:30px;
+  outline: none;
+  cursor: pointer;
+}
+#ui-id-1:hover,#ui-id-2:hover,#ui-id-3:hover,#ui-id-4:hover{
+  background: #e75621;
+}
+
+.title-div
+{
+  width:100%;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding-top: 25px;
+  padding-bottom: 15px;
+  _padding-left:140px;
+}
+.home_title{
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+a.home_description{
+  font-size: 15px;
+  font-weight: bold;
+  color: #565656;
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+a.home_description:hover
+{
+  background-color: transparent;
+  color:#4edec2;
+}
+.main-title-div{
+  height:146px;
+}
+.ym-grid{
+  padding-top: 0px;
+}
+.tabs-ul-div{
+  padding:0px;
+  margin-left: 20%;
+  _width:1024px;
+
+}
+.main-tabs-div{
+  margin:0 auto;
+  width: 1024px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+.ym-grid{
+  _margin-left: 7% !important;
+}
+.ym-g100{
+  margin: 20px 19px;
+  _margin:0px !important;
+  background-color: #f0f0f0 !important;
+}
+#tabs-1,#tabs-2,#tabs-3,#tabs-4{
+  padding: 0px ;
+  margin: 0px 2px ;
+}
+#tabs,.title-div{
+  min-width: 1024px;
+  overflow: hidden;
+}
+
+.page-div
+{
+  float: left;
+  width:100%;
+text-align: center;
+padding-right: 20px;
+padding-top:30px;
+padding-bottom: 20px;
+}
+.page-link
+{ 
+  display: inline-block;
+  background-color: #ffd02c;
+  color:#1b1714;
+  width: 32px;
+  height: 31px;
+  border-radius: 16px;
+  text-decoration: none;
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 26px;
+  border: none;
+  outline:none;
+  cursor:pointer;
+  padding-top: 1px;
+
+}
+
+.page-link:hover{
+  color: #ffd02c;
+  background-color:#1b1714;
+}
+.poster-div{
+  width: 1024px;
+  height: 114px;
+ background-image:url('../../img/drawing-poster.jpg');
+background-repeat:no-repeat; 
+padding-top: 141px;
+cursor:pointer;
+}
+
+a.app-store-link{
+  display: block;
+  width: 132px;
+  height: 40px;
+  background-color: #FFFFFF;
+  text-align: center;
+  color:#29c7c9;
+  margin-left: 850px;
+  border-radius: 20px;
+  font-size: 20px;
+  line-height: 40px;
+}
+a.app-store-link:hover{
+  background-color: #29c7c9;
+  color: #FFFFFF;
+}
+.drawing-button-div,.singing-button-div
+{
+  width: 20px;
+  height:20px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+}
+.drawing-button-div{
+   margin-left:890px;
+  margin-top: 52px;
+}
+.singing-button-div{
+ margin-left:10px;
+  margin-top: 0px;
+}
+
+.loading-div{
+  margin:90px 0px 70px 0px;
+}
+.loading-image-div{
+  position: absolute;
+  width: 1024px;
+  background-color: #aaaaaa;
+  opacity:0.4;
+  filter:alpha(opacity=40);
+}
+.main-loading-img{
+  margin-top: 50%;
+}

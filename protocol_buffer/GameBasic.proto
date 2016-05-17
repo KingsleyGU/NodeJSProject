@@ -1,0 +1,496 @@
+
+import "GameConstants.proto";
+//import "Group.proto";
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.model";
+option java_outer_classname = "GameBasicProtos";
+
+message PBKeyValue{
+  required string name = 1;
+  optional string value = 2;
+}
+
+message PBIntKeyValue{
+  required int32  key = 1;
+  optional string value = 2;
+}
+
+message PBIntKeyIntValue{
+  required int32  key = 1;
+  required int32  value = 2;
+}
+
+enum PBOpenInfoType{
+  OPEN_TO_FRIEND = 0;       // 仅对互相关注的人公开
+  OPEN_NO = 1;              // 完全不公开
+  OPEN_ALL = 2;             // 完全公开
+}
+
+message PBSNSUser {
+  required int32  type = 1;
+  required string userId = 2;
+  required string nickName = 3; 
+  optional string accessToken = 4;
+  optional string accessTokenSecret = 5;
+  optional string refreshToken = 6;
+  optional int32 expireTime = 7;
+  optional string qqOpenId  = 8;                // QQ Weibo Only
+  optional string credential = 20;              // Share SDK保存的授权信息，Base64字符串
+}
+
+message PBSNSUserCredential {
+  required int32  type = 1;                     // SNS Type
+  optional string credential = 20;              // Share SDK保存的授权信息，Base64字符串
+}
+
+message PBUserLevel{
+  required string gameId = 1;
+  optional int32  level = 2 [default=1];
+  optional int64  exp = 3 [default=0];
+}
+
+message PBGameUser {
+  required string userId = 1;                   // 用户ID
+  required string nickName = 2;                 // 用户昵称
+  optional string avatar = 3;                   // 用户头像
+  optional bool gender = 4 [default=false];     // 用户性别，TRUE：男；FALSE：女
+  repeated PBSNSUser snsUsers = 5;              // 用户社交网络信息
+  optional string location = 6;
+  optional int32  userLevel = 7;                // 用户等级
+  optional string facetimeId = 8;
+     
+  optional int32 seatId = 9;                        // 座位号，从1开始
+  optional string xiaojiNumber = 10;                // 小吉号码
+  repeated PBSNSUserCredential snsCredentials = 11; // SNS授权信息，不含用户的SNS个人资料（如昵称、头像等）
+
+  optional bool isPlaying = 20 [default=true];      // 用户是否参与当前游戏，默认为true
+  optional bool isTakenOver = 21 [default=false];   // 用户是否被系统接管，默认为false
+  repeated PBKeyValue attributes = 22;              // 其他属性，用于不同游戏个性化的参数传递，如用户骰子
+
+  optional string email = 31;
+  optional string password = 32;
+  
+  optional string birthday = 33;                    // 格式：19800102
+  optional int32  zodiac = 34;                      // 星座：1-12
+  optional int32  guessWordLanguage = 35[default=1];// 猜词语言: 1:Chinese 2:English
+  optional string backgroundURL = 36;               // 用户背景Remote URL
+  optional string deviceToken = 37;                 // iPhone Device Token
+  optional string countryCode = 38;                 // 国家代码，如 CN
+  optional string language = 39;                    // 设备语言，如 zh_Hans
+
+  // level & experience
+  optional int32  level = 41;                       // 当前游戏的等级
+  optional int64  experience = 42;                  // 当前游戏的经验
+  
+  // account info
+  optional int32  coinBalance = 51;                 // 金币余额
+  optional int32  diamondBalance = 52;              // useless
+  optional int32  ingotBalance = 53;                // 元宝余额
+  
+
+
+  // user items
+  repeated PBUserItem items = 61;
+
+  // device info
+  optional string deviceModel = 71;                 // 设备型号
+  optional string deviceOS = 72;                    // 设备操作系统
+  optional string deviceId = 73;                    // 设备唯一ID
+  optional string deviceType = 74;                  // 设备类型
+  repeated string blockDeviceIds = 75;              // 禁用的设备ID
+
+  optional string bloodGroup = 81;                  // 血型
+  optional int32  fanCount = 82;                    // 粉丝数目
+  optional int32  followCount = 83;                 // 关注数目
+
+  optional float  longitude = 84;                   // 用户位置经度
+  optional float  latitude = 85;                    // 用户位置纬度
+  optional bool   isJailBroken = 86;                // 是否越狱
+
+  optional PBOpenInfoType openInfoType = 91[default=OPEN_TO_FRIEND];        // 信息公开类型
+  optional int32  opusCoverflowType = 92;           // 用户作品的cover flow展示设置
+  
+  optional string signature = 100;
+  optional int32  featureOpus = 101;                // 推荐作品标志
+  optional string friendMemo = 102;                 // 用户好友备注
+  optional int32  emailVerifyStatus = 103;          // 用户邮件验证状态
+  optional bool   canShakeNumber = 104[default=false]; // 用户是否可以摇一摇获取小吉号码
+  optional int32  shakeNumberTimes = 105[default=0];   // 用户可以摇一摇的次数
+  optional int32  takeCoins = 106 [default=0];         // 用户可以领取的金币数目
+
+  optional PBSimpleGroup groupInfo = 150; 
+
+  optional int32 singRecordLimit = 200[default = 30];  //你唱我猜用户最长录音时间限制。 
+  
+
+}
+
+message PBSimpleGroup{
+    required string groupId = 1;
+    required string groupName = 2;
+    required string groupMedal = 3;
+}
+
+message PBGameSession {
+  optional string gameId = 1;                   // 哪个游戏
+  required int64 sessionId = 2;                 // 游戏会话ID
+  required string name = 3;                     // 本次游戏的名称（如房间名）
+  optional string createBy = 4;                 // 游戏创建者
+  optional int32 createTime = 5;                // 游戏创建时间戳
+  optional string host = 6;                     // 游戏房间主人
+  optional int32 status = 7;                    // 游戏状态
+  optional string currentPlayUserId = 8;        // 当前轮到的用户（如画画的用户）
+  optional string nextPlayUserId = 9;           // 下一个要轮到的用户（如画画的用户）     
+  optional string password = 10;                // 房间密码（为空表示没有密码）
+  
+  optional int32 ruleType = 11 [default=0];     // 游戏规则类型，不同游戏不同，大话骰参照DiceGameRuleType定义
+  repeated PBGameUser users = 50;               // 用户列表
+}
+
+message PBGameSessionChanged {
+  optional int64 sessionId = 1;
+  optional int32 status = 2;
+  optional string currentPlayUserId = 3;  
+  
+  repeated PBGameUser usersAdded = 5;
+  repeated string userIdsDeleted = 6;
+  repeated PBGameUser usersUpdated = 7;
+}
+
+message PBDrawBg
+{
+    required string bgId = 1;
+    optional string localUrl  = 2;
+    optional string remoteUrl  = 3;
+    optional int32 showStyle = 4 [default=0]; // 0 for show in center, 1 for show in pattern
+}
+
+message PBGradient {
+    required float division = 1;
+    repeated int32 color = 2[packed = true];
+    repeated float point = 3;
+}
+
+// internal usage, to store draw data
+message PBDrawAction {
+  required int32 type = 1;                      // 0 : draw, 1 : clean draw, 2 : shape 3: change bg with color,  
+                                                //4 : change bg with draw bg
+//5 gradient action
+
+  //deprecated attribute
+  repeated int32 points = 2 [packed=true];      // compressed INT point (include float x,y), deprecated in new version 2
+
+  optional float width = 3;
+  
+  //deprecated attribute
+  optional int32 color = 4;
+
+  optional int32 penType = 5;
+  
+  // shape information
+  optional int32 shapeType = 6;
+  repeated float rectComponent = 7;             //startX, startY, endX, endY
+  optional bool shapeStroke = 8;
+  
+  // for no compressed points, add 2013-03-04
+  repeated float pointsX = 11;
+  repeated float pointsY = 12;
+  
+  // for new compressed algorithm color
+  optional int32 betterColor = 13;
+
+  optional PBDrawBg drawBg = 14; //
+  
+  //shadow offset, add by Gamy 2013-5-30
+  optional float shadowOffsetX = 15;
+  optional float shadowOffsetY = 16;
+  optional int32 shadowColor   = 17;
+  optional float shadowBlur    = 18;
+ 
+ 
+  optional int32 clipTag = 20; //the id of clip action, 0 for no clip
+  optional int32 clipType = 21; //1: Rect, 2: Circle, 3: Multiple Edge Shape 4: Path
+
+
+  optional int32 layerTag = 23;                     //layer identifier
+  optional float layerAlpha = 24[default=1.0];      //层透明度
+
+ //Support gradient
+  optional PBGradient gradient = 30;
+}
+
+
+
+message PBMessage {
+  required string messageId = 1;
+  required string from = 2;
+  required string to = 3;
+  optional int32  status = 4;
+  optional int32  type = 5[default=0];              // 消息类型：refer to PBMessageType
+  optional bool   isGroup = 6[default=false];       // 是否是群消息
+
+  optional PBGameUser fromUser = 7;                 // 发送消息用户的详细信息，用于群消息
+  optional PBGameUser toUser = 8;                   // 接受消息用户的详细信息，用于群消息
+
+  optional string text = 20;
+  repeated PBDrawAction drawData = 21;  
+  optional int32  createDate = 22;
+  optional int32 drawDataVersion = 23 [default=0];      // draw data version
+  optional PBSize canvasSize = 24; //used after draw data version 2.0
+
+  // add for ask/reply location
+  optional double longitude = 31;
+  optional double latitude = 32;
+  optional string reqMessageId = 33;
+  optional int32  replyResult = 34;
+  
+  optional string imageURL = 41;                // for message type image, normal image
+  optional string thumbImageURL = 42;           // for message type image, thumb image
+}
+
+message PBMessageStat {
+  required string userId = 1;
+  
+  // latest message user data
+  required string friendUserId = 2;             // 如果是群用户，则这个ID就是群ID，下面的昵称、头像等都是群的相关信息
+  required string friendNickName = 3;
+  optional string friendAvatar = 4;
+  optional bool   friendGender = 5;
+  
+  optional bool   isGroup = 6[default=false];   // 是否是群用户
+  
+  // latest message info
+  optional string messageId = 10;
+  required string from = 11;
+  required string to = 12;  
+  optional string text = 13;
+  repeated PBDrawAction drawData = 14;  
+  optional int32  createDate = 15;
+  optional int32  type = 16;
+  
+  // statistic
+  optional int32  modifiedDate = 31;
+  optional int32  totalMessageCount = 32;
+  optional int32  newMessageCount = 33;
+  
+}
+
+message PBUserBasicInfo
+{
+    required string userId = 1;
+    required string nickName = 2;
+    required string avatar = 3;
+    required string gender = 4;
+}
+
+message PBUserResult {
+  required string userId = 1;
+  required bool win = 2;                    // 结果：false输，true赢
+  required int32 gainCoins = 5;             // 获得的金币
+}
+
+enum PBGameCurrency{
+  Coin = 0;             // 金币
+  Ingot = 1;            // 元宝
+}
+
+enum PBDrawItemType{
+  DrawNomal = 0;                // 普通道具
+  DrawTool = 1;                 // 画画工具
+  DrawTaoBao = 9999;            // 淘宝实物
+}
+
+enum PBDiceItemType{
+  DiceNomal = 0;                // 普通道具
+}
+
+message PBItemPriceInfo {
+  required int32 price = 1;                       // 单个售价，如 6
+  optional PBGameCurrency currency = 2;           // 游戏货币
+}
+
+message PBPromotionInfo{
+  required int32 price = 1;                       // 折后价格
+  optional int32 startDate = 2;                   // 起始日期
+  optional int32 expireDate = 3;                  // 截止日期
+}
+
+enum PBGameItemConsumeType{
+  NonConsumable = 1;                            // 非消耗品
+  AmountConsumable = 2;                         // 数量消耗品
+  TimeConsumable = 3;                           // 时间消耗品
+}
+
+enum PBGameTimeUnit{
+  Hour = 1;
+  Day = 2;                           
+  Month = 3;                         
+  Year = 4;                           
+}
+
+message PBGameItem {
+  required int32  itemId = 1;                           // 道具ID
+  required string name = 2;                             // 道具名称，英文，用于国际化，比如Flower，代码需要使用本地的国际化字符串对其处理
+  optional string desc = 3;                             // 道具描述，英文，用于国际化，代码需要使用本地的国际化字符串对其处理
+  
+  optional string url = 4;                              // 道具URL
+  
+  optional PBGameItemConsumeType consumeType = 5;       // 消耗类型
+
+  optional string image = 11;                           // 道具图片地址，远程URL
+  optional string demoImage = 12;                       // 道具效果演示图片URL
+  
+  optional int32 type = 15;                             // 类型
+
+  optional string appleProductId = 22;                  // Apple IAP购买ID
+  
+  optional PBItemPriceInfo priceInfo = 23;              // 价格信息
+  optional PBPromotionInfo promotionInfo = 24;          // 促销信息
+  
+  optional int32 defaultSaleCount = 30;                 // 默认购买数量,数量消耗品特有字段
+  
+  optional PBGameTimeUnit usageLifeUnit = 50;           // 单位:小时,时间消耗品特有字段
+  optional int32 usageLife = 51;                        // 使用寿命,时间消耗品特有字段
+}
+
+message PBGameItemList {
+  repeated PBGameItem items = 1;
+}
+
+enum PBIAPProductType{
+  IAPCoin = 1;
+  IAPIngot = 2;
+}
+
+message PBIAPProduct{
+  required PBIAPProductType type = 1;           // 类型   
+  required string appleProductId = 2;           // Apple IAP购买ID
+  optional string alipayProductId = 3;          // Ali pay购买ID
+
+
+  optional string name = 5;                     // 产品名称
+  optional string desc = 8;                     // 产品描述
+
+  optional int32 count = 11[default = 1];       // 个数
+
+  optional string totalPrice = 12;              // 总价格(default，默认的，必须要有这个字段)
+  optional string currency = 21;                // 货币符号(default，默认的，必须要有这个字段)
+  optional string country = 22;                 // 适应国家，如中国"CN"(default，默认的，必须要有这个字段)
+  optional string saving = 50;                  // 节省百分比，如"50%"(default，默认的，必须要有这个字段)
+
+  optional string taobaoUrl = 61;               // 对应的淘宝链接
+  
+  repeated PBIAPProductPrice prices = 99;       // 总价格
+}
+
+message PBIAPProductPrice{
+  optional string price = 1;                   // 总价格
+  optional string currency = 2;                // 货币符号
+  optional string country = 11;                // 适应国家，中国"CN"
+  
+  optional string saving = 99;                 // 节省百分比，如"50%"
+}
+
+message PBIAPProductList{
+  repeated PBIAPProduct products = 1;
+}
+
+message PBUserItem {
+  required int32 itemId = 1;
+  optional int32 count = 2[default=0];          // 个数
+
+  optional int32 createDate = 5;                // 第一次购买日期
+  optional int32 modifyDate = 6;                // 最近一次修改时间
+  optional int32 expireDate = 7;                // 过期时间
+}
+
+message PBUserItemList {
+  repeated PBUserItem userItems = 2;
+}
+
+message PBLocalizeString{
+    required string languageCode = 1;           // 语言代码，如 "en", "zh_Hans"，同iOS语言命名规范
+    optional string text = 2;                   // 通用语言
+    required string localizedText = 3;          // 本地化语言
+}
+
+message PBApp{
+    repeated PBLocalizeString name = 1;
+    required string appId = 2;
+    repeated PBLocalizeString desc = 3;
+    optional string downloadURL = 4;
+    optional string logo = 5;                   // app logo remote URL
+}
+
+message PBSize
+{
+    optional float width = 1 [default=304.0];
+    optional float height = 2 [default=320.0];
+}
+
+message PBOpusRank
+{
+    required int32 type = 1 [default=1];
+    required int32 value = 2 [default=0];
+    optional string userId = 3;
+}
+
+// 比赛奖励结果
+message PBUserAward
+{
+    required PBIntKeyValue awardType = 1;           // 奖励类型，key为类型整数值，value为类型名字，如最佳创意奖
+    required PBGameUser user = 2;                   // 用户信息
+    optional int32 rank = 3;                        // 奖励结果名次，如：第一名1，第二名2，第三名3
+    optional float score = 4;                       // 用户得分，可选
+    optional int32 coins = 5;                       // 赢取的金币
+    optional string opusId = 6;                     // 奖励的作品ID
+    
+    optional int32 createDate = 11;                 // 获得奖励日期
+
+    optional string contestId = 20;                 
+}
+
+
+enum PBTaskStatus
+{
+    
+    TASK_STATUS_CAN_TAKE = 0;            // 可以执行
+    TASK_STATUS_DONE = 1;                // 已经执行完毕
+    TASK_STATUS_AWARD = 2;               // 已经领取奖励
+    TASK_STATUS_EXPIRED = 3;             // 已经过期
+    TASK_STATUS_WAIT_FOR_START = 4;      // 未开始
+    TASK_STATUS_ALWAYS_OPEN = 5;         // 可重复执行任务
+}
+
+enum PBTaskIdType
+{    
+    TASK_NONE = 0;
+    TASK_CHECK_IN = 1;
+    TASK_BIND_SINA = 2;
+    TASK_BIND_QQ = 3;
+    TASK_SHARE_SINA = 4;
+    TASK_SHARE_WEIXIN_TIMELINE = 5;
+    TASK_SHARE_QQ_SPACE = 6;
+    TASK_APP_REVIEW = 7;
+    TASK_CREATE_OPUS = 8;
+    TASK_GUESS_OPUS = 9;
+    TASK_SHARE_OPUS = 10;
+    TASK_SHARE_QQ_WEIBO = 11;
+    TASK_APP_UPGRADE = 12;
+    
+    TASK_APP_WALL = 100;
+    TASK_APP_DOWNLOAD = 200;
+    
+}
+
+message PBTask
+{
+    required int32 taskId = 1;              // 任务ID
+    required string name = 2;               //
+    optional string desc = 3;
+    optional PBTaskStatus status = 4;
+    optional int32  badge = 5;
+    optional int32  award = 6;
+}

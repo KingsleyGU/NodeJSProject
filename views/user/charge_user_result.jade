@@ -1,0 +1,53 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+          
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span8
+                .container
+                    - if (charge_result.length != 0) {
+                      h2.text-center 充值结果
+                      table.table.table-bordered#user_charge_result
+                          thead
+                              tr.success
+                                  td 用户ID
+                                  td 金币(个) 
+                                  td 元宝(个) 
+                          tbody
+                              - for(var i = 0; i < charge_result.length; i++) {
+                                    tr.info(id ='#{charge_result[i].uid}')
+                                      td= charge_result[i].uid 
+                                      td= charge_result[i].coins 
+                                      td= charge_result[i].ingots
+                              - }
+                    - }
+                                
+                    - if (bad_uids.length != 0) {
+                      h2.text-center 无法充值的ID 
+                      table.table.table-bordered#failed_charge_result
+                          thead
+                              tr.error
+                                  td 用户ID
+                                  td 原因
+                          tbody
+                              - for(var i = 0; i < bad_uids.length; i++) {
+                                    tr.info(id ='#{bad_uids[i].uid}')
+                                      td= bad_uids[i].uid 
+                                      td= bad_uids[i].cause
+                              - }
+                    - }
+
+    include ../includes/foot    
+    include ../includes/script   
+
+// all js must add below the jQuery and Boostrap JS, otherwize they don't work     
+// add click table row function handler here, powered by jQuery    
+script

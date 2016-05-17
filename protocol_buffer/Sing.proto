@@ -1,0 +1,64 @@
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.model";
+option java_outer_classname = "SingProtos";
+
+// 分类文件格式
+// 每个分类之间用^^分隔
+// ##<name>##<tags>
+//  tags之间使用$$分隔
+
+message PBSongCategory{
+    required string name = 1;
+    repeated string songTags = 3;
+}
+
+message PBSongCategoryList{
+    repeated PBSongCategory categorys = 1;
+}
+
+// 歌曲文件格式
+// 歌曲之间用^^分隔
+// <songId>##<name>##<author>##<lyric url>##<tagNames>
+// tagNames之间用$$分隔
+
+message PBSong{
+  required string songId = 1;       // 歌曲Id
+  required string name = 2;         // 歌曲名称
+
+  optional string author = 3;       // 作者
+  optional string lyric = 4;        // 歌词
+  optional string lyricUrl = 5;     // 歌词的URL
+
+  repeated string tag = 20;         // 标签，用于分类
+}
+
+message PBSongList{
+  repeated PBSong songs = 1;
+}
+
+enum PBVoiceType{
+  VoiceTypeOrigin = 0;
+  VoiceTypeTomCat = 1;
+  VoiceTypeMale = 2;
+  VoiceTypeFemale = 3;
+  VoiceTypeDuck = 4;
+  VoiceTypeChild = 5;
+}
+
+message PBSingOpus {
+  optional PBSong song = 1;
+
+  // 声音变声器参数控制
+  optional PBVoiceType voiceType = 2;
+
+  optional float duration = 3[default = 1];
+  optional float pitch = 4[default = 1];
+  optional float formant = 5[default = 1];
+  
+  optional float voiceDuration = 20;                // 声音数据长度
+
+  // 本地数据
+  optional string localNativeDataURL = 100;         // 本地原声数据（未做处理）
+}

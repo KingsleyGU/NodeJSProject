@@ -1,0 +1,25 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+          
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span8
+                .container
+                    div.control-group
+                        p.text-center
+                          h1 #{post_result}
+
+    include ../includes/foot    
+    include ../includes/script   
+
+// all js must add below the jQuery and Boostrap JS, otherwize they don't work     
+// add click table row function handler here, powered by jQuery    
+script

@@ -1,0 +1,77 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span9
+                .hero-unit
+                    form.form-horizontal(method='post', action='./doPostBulletin')
+                        div.control-group
+                            div.controls
+                                h2  发布公告
+                        div.control-group
+                            label.control-label(for="game_id") 游戏ID
+                            div.controls
+                                select(name='game_id')
+                                   option Draw
+                                   option Zhajinhua 
+                                   option Dice 
+                                   option Learndraw 
+                                   option Puredraw  
+                                   option Puredrawfree 
+                                   option Photodraw 
+                                   option Photodrawfree
+                                   option DreamAvatar 
+                                   option DreamAvatarFree
+                                   option DreamLockscreen 
+                                   option DreamLockscreenFree
+                                   option CallTrack 
+                                   option SecureSms 
+                                   option Sing 
+                        div.control-group
+                            label.control-label(for="type") 选择类型
+                            div.controls
+                                select#jump_type(name='type')
+                                    option 游戏内跳转
+                                    option 无跳转
+                        div.control-group#jump_target
+                            label.control-label(for="functionality") 跳转目标
+                            div.controls
+                                select(name='functionality')
+                                    option 商店
+                                    option 比赛 
+                                    option 画榜 
+                                    option 动态 
+                                    option 免费金币 
+                                    option 免费元宝
+                                    option 论坛免费元宝答疑
+                                    option 问题反馈
+                                    option bug报告
+                        div.control-group
+                            label.control-label(for="content") 内容 
+                            div.controls
+                                    textarea(rows="8",placeHolder='公告内容', name='content')
+                        div.control-group
+                            div.controls
+                                input.btn-danger(type='submit', value=' 发 送 ')   
+            
+    include ../includes/foot    
+    include ../includes/script    
+
+// all js must add below the jQuery and Boostrap JS, otherwize they don't work
+// add click table row function handler here, powered by jQuery
+script
+    $("select#jump_type").change(function() {
+        if ( $("select#jump_type").val() === '无跳转') {
+            $("div.control-group#jump_target").hide();
+        } else {
+            $("div.control-group#jump_target").show();
+        }
+    });

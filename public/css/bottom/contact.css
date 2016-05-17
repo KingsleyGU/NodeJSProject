@@ -1,0 +1,40 @@
+.email_span{
+	color:#29c7c9;
+}
+.content-item2-email,.content-item1-email{
+	margin-bottom: 40px;
+}
+.weibo_name{
+	color:#f26623;
+}
+
+.main_div{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -290px;
+
+}
+.content_detail{
+	width: 340px;
+	padding: 50px 120px;
+	background-color: #f4f4f4;
+	margin-bottom: 90px;
+
+}
+#foot-link_contact
+{
+	color:#4acfb5;
+}
+a.weibo-link{
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 18px;
+    font-weight: bold;
+	color:#f26623;
+	background-color: transparent;
+}
+a.weibo-link:hover{
+	color: #29c7c9;
+	background-color: transparent;
+}

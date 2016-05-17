@@ -1,0 +1,531 @@
+import "GameConstants.proto";
+import "GameBasic.proto";
+
+import "Draw.proto";
+import "Dice.proto";
+import "ZhaJinHua.proto";
+import "BBS.proto";
+import "Opus.proto";
+import "Photo.proto";
+import "Sing.proto";
+import "Group.proto";
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.message";
+option java_outer_classname = "GameMessageProtos";
+  
+message GetRoomsRequest {
+  required string gameId = 2;                   // 游戏ID，比如你画我猜为：draw
+  optional int32 roomType = 3;                  // 0表示所有房间，1表示好友房间
+  optional string keyword = 4;
+    
+}
+
+message GetRoomsResponse {
+  repeated PBGameSession sessions = 1;   
+  optional int32 ruleType = 2;                            // 房间规则类型    
+}
+
+message CreateRoomRequest {
+  required string gameId = 1;                   // 游戏ID，比如你画我猜为：draw
+  required PBGameUser user = 2;
+  required string roomName = 3;                 // 房间名
+    optional string password = 4;                         // 房间密码
+    
+    optional int32 ruleType = 5;                            // 房间规则类型
+    optional int32 version = 6;                 // version for new interface
+}
+
+message CreateRoomResponse {
+  required PBGameSession gameSession = 1;
+}
+
+message SearchRoomRequest{
+  optional string keyword = 1;
+  optional int32  rangeType = 2[default=0];            // 0: 所有；1：好友
+}
+
+message SearchRoomResponse{
+  repeated PBGameSession sessions = 1;   
+}
+
+
+message RegisterRoomsNotificationRequest {
+  repeated int32 sessionIds = 2[packed=true];
+}
+
+message RegisterRoomsNotificationResponse {
+
+}
+
+message UnRegisterRoomsNotificationRequest {
+  repeated int32 sessionIds = 2[packed=true];     // 数组为空表示取消所有注册
+}
+
+message UnRegisterRoomsNotificationResponse {
+
+}
+
+/********************* For dice  ***********************/
+
+message CallDiceRequest {
+  optional int32 num = 10;                     
+  optional int32 dice = 11;
+  optional bool wilds = 20[default=false];           
+}
+
+message CallDiceResponse {
+}
+
+message OpenDiceRequest {
+  optional int32 openType = 1[default=0];         // 开0，抢开1
+  optional int32 multiple = 2[default=1];         // 开的倍数
+}
+
+message OpenDiceResponse {
+}
+
+message UseItemRequest {
+  required int32 itemId = 1;
+  
+  optional int32 extendTime = 100;                // 加时或减时道具，设定的新时长（秒），相对值
+
+  optional int32  direction = 22;                                       // 逆道具，返回方向，0: 顺时针；1: 逆时针
+  optional string nextPlayUserId = 23;                                  // 使用道具后，下个玩家的ID，用户逆道具或者减时道具
+  optional bool   decreaseTimeForNextPlayUser = 24[default=false];      // 下一个玩家是否被使用了减时道具
+}
+
+message UseItemResponse {
+  required int32 itemId = 1;
+  repeated PBDice dices = 20;
+  
+  optional PBDiceAction action = 21;                                    // 建议返回的行动
+  optional int32  direction = 22;                                       // 逆道具，返回方向，0: 顺时针；1: 逆时针
+  optional string nextPlayUserId = 23;                                  // 使用道具后，下个玩家的ID，用户逆道具或者减时道具
+  optional bool   decreaseTimeForNextPlayUser = 24[default=false];      // 下一个玩家是否被使用了减时道具
+}
+
+message UserDiceNotification {
+  repeated PBUserDice userDice = 1;
+  optional bool cleanAll = 2 [default=false];   // 是否清除之前的所有骰子
+  optional bool isWild = 3 [default=false];     // 是否是斋
+}
+
+/************************* For ZhaJinHua *************************/
+
+enum BetType{
+  BET_TYPE_CALL = 1;        // 跟注
+  BET_TYPE_RAISE = 2;       // 加注
+}
+
+message TimeoutSettingRequest{
+  optional PBZJHUserAction action = 1 [default = FOLD_CARD];
+}
+
+message TimeoutSettingResponse{
+
+}
+
+message BetRequest{
+  required int32 singleBet = 1;                                 // 单注大小
+  required int32 count = 2 [default = 1];                       // 注数
+  optional bool  isAutoBet = 4 [default = false];               // 是否自动跟注
+}
+
+message BetResponse{
+}
+
+message CheckCardRequest{
+}
+
+message CheckCardResponse{
+}
+  
+message FoldCardRequest{
+}
+ 
+message FoldCardResponse{
+}
+
+message ShowCardRequest{
+  repeated int32 cardIds = 1 [packed=true];
+}
+
+message ShowCardResponse{
+}
+  
+message CompareCardRequest{
+  required string toUserId = 1;  // 被比牌的用户
+}
+
+message CompareCardResponse{
+  repeated PBUserResult userResult = 2;   // 比牌结果
+}
+
+message ChangeCardRequest{
+  required int32 cardId = 1;
+}
+
+message ChangeCardResponse{
+  required int32 oldCardId = 1;
+  required PBPoker newPoker = 2;
+  optional PBZJHCardType cardType = 3  [default = UNKNOW];      // 牌类型
+}
+
+message JoinGameRequest {
+  required string userId = 1;                    // 用户ID
+  required string gameId = 2;                    // 游戏ID，比如你画我猜为：draw    
+  
+  optional int32  autoNew=3 [default=0];         // 没有合适的游戏加入，则自动创建一个新的
+  required string nickName = 4;                  // 用户在游戏中的昵称
+  optional string avatar = 5;
+  repeated int64 excludeSessionId = 6;         
+  optional int64 sessionToBeChange = 7;
+  optional bool gender = 8;
+  optional bool isRobot = 9;                     // 是否是机器人用户
+  optional int32 targetSessionId = 10;           // 指定加入的Session ID
+  optional int32 guessDifficultLevel = 11;       // 猜词难度，默认为1
+  optional string roomId = 12;                   // 请求加入的好友房间ID
+  optional string roomName = 13;                 // 请求加入的好友房间名称
+  repeated PBSNSUser snsUsers = 14;              // 用户社交网络信息  
+  optional string location = 15;
+  optional int32 userLevel = 16;
+
+  optional PBGameUser user = 100;                   // 统一协议接口
+  optional int32 ruleType = 101;                    // 加入游戏的规则类型
+  optional int32 version = 102;                     // force default value to new version
+  
+}
+
+message JoinGameResponse {
+  required PBGameSession gameSession = 1;
+  optional PBZJHGameState zjhGameState = 11;
+}
+
+//message ChangeRoomRequest {                     // 更换房间请求
+//  repeated int64 excludeSessionId = 1;
+//}
+//
+//message ChangeRoomResponse {
+//  required PBGameSession gameSession = 1;
+//}
+
+message StartGameRequest {                     // 开始游戏请求
+}
+
+message StartGameResponse {                    // 开始游戏响应
+  optional string currentPlayUserId = 5;       // 当前轮到的用户（如画画的用户）
+  optional string nextPlayUserId = 6;          // 下一个要轮到的用户（如画画的用户）
+}
+
+
+message RoomNotificationRequest {
+  repeated PBGameSessionChanged sessionsChanged = 1;
+  repeated PBGameSession sessionsAdded = 2;
+  repeated int32 sessionIdsDeleted = 3;
+}
+
+message RoomNotificationResponse{
+}
+
+
+message RollDiceBeginNotificationRequest {
+  
+}   
+
+message RollDiceBeginNotificationResponse {
+}
+
+message RollDiceEndNotificationRequest{
+  repeated PBUserDice userDice = 1;
+} 
+
+message RollDiceEndNotificationResponse{
+  
+} 
+
+message NextPlayerStartNotificationRequest {
+  required string currentPlayUserId = 1;
+  required string nextPlayUserId = 2;
+  optional int32  expiredTime = 3;              // 游戏玩家需要在指定时间内做出响应，0表示使用默认值，－1表示不限制
+  optional int32  direction = 4;                // 0: 顺时针；1: 逆时针
+}
+
+message NextPlayerStartNotificationResponse {
+}
+
+
+message BetDiceRequest {
+  required int32  option = 1;       // 0: 开家赢； 1：开家输
+  required int32  ante = 2;         // 底注
+  required float  odds = 3;         // 赔率
+}
+
+message BetDiceResponse {
+}
+
+message GameOverNotificationRequest {
+  optional PBDiceGameResult gameResult = 1;                 // 默认为大话骰
+  optional PBZJHGameResult zjhGameResult = 2;               // 炸金花
+} 
+  
+message GameOverNotificationResponse{
+}                        
+
+message GameChatRequest{
+  repeated string toUserId = 1;                     // 对谁说，默认对所有
+  optional string content = 2;                      // 说的内容  
+  optional int32  chatType = 3 [default=0];         // 聊天类型：0：群聊；1：私聊
+  optional int32  contentType = 4 [default=1];      // 内容类型：1：文本；2：表情符号
+  optional string expressionId = 5;                 // 表情符号ID
+  optional string contentVoiceId = 6;               // 内容对应播放的语音ID(文件名)
+}
+
+message GameChatResponse{
+}
+
+message SendDrawDataRequest {
+  optional string word = 10;
+  optional int32 level = 11;
+  optional int32 language = 12;                 // 1 Chinese, 2 English
+
+  repeated int32 points = 1 [packed=true];
+  optional float width = 22;
+  optional int32 color = 23;
+  optional int32 penType = 24;
+  
+  optional string guessWord = 41;
+  optional string guessUserId = 42;
+  optional bool guessCorrect = 43;  
+
+  optional PBDrawAction drawAction = 44;    // add by Gamy 2013-4-3
+  optional PBSize canvasSize = 45;          // add by Gamy 2013-4-3
+}
+
+message SendDrawDataResponse{
+}
+
+message GameStartNotificationRequest{                 // 游戏开始通知，用于服务器通知所有同一个会话里面的用户
+    optional PBZJHGameState zjhGameState = 11;
+}
+
+message GameStartNotificationResponse{
+}
+
+message GeneralNotification{                 
+
+  optional string sessionHost = 3;                     // 房间主人
+  optional int32  sessionStatus = 4;                   // 会话状态
+  optional string currentPlayUserId = 5;               // 当前轮到的用户（如画画的用户）
+  optional string nextPlayUserId = 6;                  // 下一个要轮到的用户（如画画的用户）
+  optional string newUserId = 7;
+  optional string quitUserId = 8;
+  optional string nickName = 9;
+  optional string userAvatar = 10;
+  optional bool   userGender = 11;
+  repeated PBSNSUser snsUsers = 12;                    // 用户社交网络信息    
+  optional string location = 13;
+  optional int32 userLevel = 14;
+  
+  // draw data
+  repeated int32 points = 21 [packed=true];
+  optional float width = 22;
+  optional int32 color = 23;
+  optional int32 penType = 24;
+  
+  // word data
+  optional string word = 31;
+  optional int32 level = 32;
+  optional int32 round = 33;
+  optional int32 language = 34;
+  
+  // guess data
+  optional string guessWord = 41;
+  optional string guessUserId = 42;
+  optional bool guessCorrect = 43;
+  optional int32 guessGainCoins = 44;
+  
+  // chat
+  repeated string chatToUserId = 51;                 // 对谁说，默认对所有
+  optional string chatContent = 52;                  // 说的内容
+  optional int32  chatType = 53;                     // 说的类型
+  
+  // game turn result points
+  optional int32 turnGainCoins = 61;
+} 
+message FacetimeChatRequest {    
+  required PBGameUser user = 1;
+  optional bool chatGender = 2; // true for male, false for female.
+}
+
+message FacetimeChatResponse {    
+  repeated PBGameUser user = 1;
+  required bool  chosenToInitiate = 2; 	// 是否能主动发起聊天
+}
+
+message GameMessage {
+  required GameCommandType command = 1;
+  required int32 messageId = 2;                             // 和请求消息对应的消息ID
+  optional GameResultCode resultCode = 3 [default=SUCCESS]; // 响应结果，用于响应消息，0为成功
+  
+  optional string userId = 4;                               // 消息来自哪个用户
+  optional int64  sessionId = 5 [default=0];
+  optional int32  round = 6;
+  optional GameCompleteReason completeReason = 7;
+  optional int32  onlineUserCount = 8;
+  optional string toUserId = 9;                             // 消息要发给哪个用户
+  optional string currentPlayUserId = 10;                   // 当前游戏轮到的用户
+  
+  
+  
+  optional JoinGameRequest joinGameRequest = 11;
+  optional JoinGameResponse joinGameResponse = 12;
+  
+  optional StartGameRequest startGameRequest = 13;
+  optional StartGameResponse startGameResponse = 14;
+  
+  optional GameStartNotificationRequest gameStartNotificationRequest = 15;
+  optional GameStartNotificationResponse gameStartNotificationResponse = 16;
+
+  
+  optional SendDrawDataRequest sendDrawDataRequest = 21;
+  optional SendDrawDataResponse sendDrawDataResponse = 22;
+    
+  optional GameChatRequest chatRequest = 23;
+  optional GameChatResponse chatResponse = 24;
+
+  optional FacetimeChatRequest facetimeChatRequest = 31;
+  optional FacetimeChatResponse facetimeChatResponse = 32;
+  
+  optional GeneralNotification notification = 51;
+  
+  optional GetRoomsRequest getRoomsRequest = 101;
+  optional GetRoomsResponse getRoomsResponse = 102;
+  
+  optional CreateRoomRequest createRoomRequest= 103;
+  optional CreateRoomResponse createRoomResponse= 104;
+  
+  optional SearchRoomRequest searchRoomRequest = 105;
+  optional SearchRoomResponse searchRoomResponse = 106;  
+  
+  optional RoomNotificationRequest roomNotificationRequest = 107;
+  
+  optional RollDiceEndNotificationRequest rollDiceEndNotificationRequest = 109;
+  
+  optional CallDiceRequest callDiceRequest = 111;
+  optional CallDiceResponse callDiceResponse = 112;
+  
+  optional OpenDiceRequest openDiceRequest = 113;
+  optional OpenDiceResponse openDiceResponse = 114;
+  
+  optional GameOverNotificationRequest gameOverNotificationRequest = 115;
+  optional GameOverNotificationResponse gameOverNotificationResponse = 116;
+
+  optional RegisterRoomsNotificationRequest registerRoomsNotificationRequest = 117;
+  optional RegisterRoomsNotificationResponse registerRoomsNotificationResponse = 118;
+  
+  optional UnRegisterRoomsNotificationRequest unRegisterRoomsNotificationRequest = 119;
+  optional UnRegisterRoomsNotificationResponse unRegisterRoomsNotificationResponse = 120; 
+  
+  optional UserDiceNotification userDiceNotification = 121;
+
+  optional BetDiceRequest betDiceRequest = 123;
+  optional BetDiceResponse betDiceResponse = 124;
+
+  optional UseItemRequest useItemRequest = 131;
+  optional UseItemResponse useItemResponse = 132;  
+  
+  
+  // For Zhajinhua
+  optional BetRequest betRequest = 151;
+  optional BetResponse betResponse = 152;
+  
+  optional CheckCardRequest checkCardRequest = 153;
+  optional CheckCardResponse checkCardResponse =154;
+  
+  optional FoldCardRequest foldCardRequest = 155;
+  optional FoldCardResponse foldCardResponse = 156;
+
+  optional ShowCardRequest showCardRequest = 157;
+  optional ShowCardResponse showCardResponse = 158;
+  
+  optional CompareCardRequest compareCardRequest = 159;
+  optional CompareCardResponse compareCardResponse = 160;
+  
+  optional ChangeCardRequest changeCardRequest = 161;
+  optional ChangeCardResponse changeCardResponse = 162;
+  
+  optional TimeoutSettingRequest timeoutSettingRequest =163;
+  optional TimeoutSettingResponse timeoutSettingResponse =164;
+  
+  // Normal
+  optional int32 startOffset = 1000;        // 返回记录列表中的开始记录位置
+  optional int32 maxCount = 1001;           // 返回记录的记录数目
+  
+  optional int32 timeStamp = 1010;          // 时间戳
+  optional string mac = 1011;               // mac=Base64(MD5(messageId+timeStamp+shareKey))
+  
+}
+
+message DataQueryResponse {
+  required int32 resultCode = 1;
+  optional int32 totalCount = 2;
+  optional int32 version = 3;
+
+  // for draw data
+  repeated PBDraw drawData = 21;
+
+  // for message
+  repeated PBMessage message = 32;
+  repeated PBMessageStat messageStat = 33;
+  
+  // for user feed
+  repeated PBFeed feed = 41;
+  repeated PBContest contestList = 42;
+  optional PBContest contest = 43;
+
+  //for bbs
+  repeated PBBBSBoard bbsBoard = 51;
+  repeated PBBBSPost bbsPost = 52;
+  repeated PBBBSAction bbsAction = 53;
+  optional PBBBSDraw bbsDrawData = 54;
+  repeated PBBBSPrivilege bbsPrivilegeList = 55;
+  repeated PBBBSUser bbsUserList = 56;
+  
+  // for wall
+  repeated PBWall wallList = 80;
+  optional PBWall wall = 81;
+  
+  optional PBUserPhoto userPhoto = 82;
+  repeated PBUserPhoto userPhotoList = 83;
+  
+  repeated PBGameUser userList = 84;
+  optional PBGameUser user = 85;
+  optional int32 userRelation = 86;             // 用户和用户之间的关系
+
+  optional PBOpus opus = 87;                // 返回作品
+  repeated PBOpus opusList = 88;            // 返回作品列表
+
+  repeated string idList = 90;              // for learn draw
+
+  optional PBSongList songs = 101;  
+  
+  optional PBGuessRank guessRank = 120; 
+  repeated PBGuessRank guessRankList = 121;
+  
+  optional PBGuessContest guessContest = 122;
+  repeated PBGuessContest guessContestList = 123;
+
+
+  //for group
+  optional PBGroup group = 150;
+  repeated PBGroup groupList = 151;
+  repeated PBGroupUsersByTitle groupMemberList = 152; 
+  repeated PBGroupNotice noticeList = 153;
+  repeated PBIntKeyIntValue badges = 155;
+  optional string url = 156;
+
+  repeated PBGroupUserRole groupRole = 157;
+}
+

@@ -1,0 +1,33 @@
+
+import "GameBasic.proto";
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.model";
+option java_outer_classname = "PhotoProtos";
+
+enum PBPhotoUsage{
+    BEGIN = 0;
+    FOR_DRAW = 1;                           // 用于临摹
+    FOR_PS = 2;                             // 用于PS素材
+    END = 3;
+}
+
+message PBUserPhoto {
+    optional string userId = 1;
+    optional string photoId = 2;            // useless for client
+    optional string userPhotoId = 3;        // used for update and delete
+    required string url = 4;
+    optional string name = 5;
+    optional int32  createDate = 6;
+    repeated string tags = 7;
+    optional int32 usage = 8;               // refer to PBPhotoUsage
+    optional float width = 9;               // photo width
+    optional float height = 10;             // photo height
+}
+
+message PBUserPhotoList {
+    required string userId = 1;
+    repeated PBUserPhoto photoList = 2;
+}
+

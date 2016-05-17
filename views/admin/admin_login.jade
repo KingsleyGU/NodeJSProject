@@ -1,0 +1,46 @@
+
+// An administrator login page
+
+doctype html
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar
+            .span9
+                .hero-unit
+                    - if (!login_user) 
+                        form.form-horizontal(method='post', action='./login')
+                            div.control-group
+                                div.controls
+                                    h2  管理员登录
+                            div.control-group
+                                label.control-label(for='account') 帐号
+                                div.controls
+                                    input#account(type='text', name='account', placeHolder='帐号名')
+
+                            div.control-group
+                                label.control-label(for='password') 口令
+                                div.controls
+                                    //- var local_password = #{password}
+                                    //if local_password
+                                    //    local_password = ''
+                                    input#password(type='password', name='password', placeHolder='口令')
+                            div.control-group
+                                div.controls
+                                    label.checkbox
+                                        input#remember(type='checkbox', name='remember_me')
+                                        记住我
+                                    input.btn-danger(type='submit', value='登录')   
+                     - else
+                         div.control-group
+                             div.controls
+                                 h3 你已经登录! 如欲更换帐号, 请先登出当前帐号!
+                         
+    include ../includes/foot    
+    include ../includes/script    

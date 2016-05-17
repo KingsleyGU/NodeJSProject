@@ -1,0 +1,42 @@
+      body{
+   font:15px/1.8 'Optima', 'Verdana', 'Microsoft Yahei', sans-serif;
+   }
+   #nav-search{
+    float:left;
+   }
+   .res-div{
+    float:right;
+    display: inline;
+    margin-top:7px;
+    margin-bottom:0px;
+   }
+   a,.ym-button{
+       font:15px/1.5 'Optima', 'Verdana', 'Microsoft Yahei', sans-serif;
+       text-decoration: none;
+       margin-right:0px;
+   }
+   .foot-links{
+       text-align:center;
+   }
+   .logo-div{
+      padding-left:50px;
+      padding-top: 15px;
+      font-size: 20px;
+      color:#FFFFFF;
+      margin-bottom: 0px;
+   }
+   .QR-pic{
+    height:100px;
+    width:100px;
+
+   }
+   .QRcode{
+    position:fixed;
+    right:0px;
+    z-index: 1924;
+    top:40%;
+    padding-left:20px;
+   }
+   #QRcode{
+       _position:absolute;
+   }

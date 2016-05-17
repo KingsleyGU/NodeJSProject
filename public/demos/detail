@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>小吉画画</title>
+
+    <!-- Mobile viewport optimisation -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- (en) Add your meta data here -->
+    <!-- (de) Fuegen Sie hier ihre Meta-Daten ein -->
+    <link rel="stylesheet" href="yaml/add-ons/accessible-tabs/tabs.css" type="text/css"/>
+    <link href="./css/flexible-grids.css" rel="stylesheet" type="text/css"/>
+    <link href="../yaml/add-ons/accessible-tabs/tabs.css" rel="stylesheet" type="text/css"/>
+    <!--[if lte IE 7]>
+    <link href="../yaml/core/iehacks.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="../lib/html5shiv/html5shiv.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+    </style>
+</head>
+<body>
+        <header>
+        <div class="ym-wrapper">
+            <div class="ym-wbox">
+                <h1>小吉画画</h1>
+            </div>
+        </div>
+    </header>
+    <nav id="nav">
+        <div class="ym-wrapper">
+            <div class="ym-hlist">
+                <ul>
+                    <li class="active">
+                        <a href="/" > <strong>首页</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">作品动态</a>
+                    </li>
+                </ul>
+                <form class="ym-searchform" id="nav-search">
+                    <input class="ym-searchfield" type="search" placeholder="关键字" />
+                    <button type="submit" class="ym-button ym-primary">搜索</button>
+                </form>
+                <div class="res-div">
+                    <a href="#" class="ym-button ym-success">登入</a>
+                    <a href="#" class="ym-button ym-success">注册</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

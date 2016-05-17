@@ -1,0 +1,35 @@
+.ym-wrapper
+    .login-form-div
+        - var local_user_value = "";
+        - var local_password_value = "";
+        if account
+           local_user_value = account;
+        else
+           local_user_value = "请输入小吉号/电子邮箱 ";
+        if password
+           local_password_value = password;
+        else
+            local_password_value = "请输入密码 ";
+
+        form.login-form(method='post')
+          div.parent_div
+            input.user-id#user-id(type='text' name="account" value='#{local_user_value}')
+            br
+            .warning_div.warning-user-id(style="display:none;")
+          div.parent_div        
+            input.log_psw-input.psw-input#log_password(type='text' name="password" value='#{local_password_value}')
+            br
+            .warning_div.warning-user-id(style="display:none;")
+          div.parent_div(style="display:none;")  
+            img(src='../img/remember.png' class="remember" id="remember_me")
+            span 记住我
+            input.rememberOrNot(type='hidden' name="remember" value="0")
+          if message != undefined
+             .warning_get_div(style="margin-top:10px;margin-bottom:20px;")  #{message} 
+          div.parent_div 
+            input.submit-input.log-submit-input(type='submit', value='登录')
+            br
+            .warning_div.warning-log-submit(style="display:none;") 抱歉，用户信息不全，不能提交
+        .skip-div
+          span 没有账号？
+          a.skip-link(href='/register') 注册一个

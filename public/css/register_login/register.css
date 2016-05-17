@@ -1,0 +1,64 @@
+html, body {
+      min-height: 100%;
+    height: auto !important;
+}
+     .register-form-div{
+        margin-top: 50px;
+        text-align: center;
+/*        position: absolute;
+        left:50%;
+        top:50%;
+        margin-left: -125px;
+        margin-top: -220px;*/
+     }
+     .user-input,.psw-input,.nickname{
+        padding: 10px 0px 10px 20px;
+        width: 300px;
+        margin-bottom: 20px;
+        font-size:100%;
+        border: 5px solid #e2e2e2;
+        padding-left: 20px;
+        border-radius: 15px;
+        outline: none;
+        color: #cac3b9;
+        font-family: '\5FAE\8F6F\96C5\9ED1';
+     }
+          .submit-input{
+        height:40px;
+        width: 230px;
+       border:none;
+       background-color: #e75621;
+       color:#FFFFFF;
+       font-size: 20px;
+       border-radius: 10px;
+       letter-spacing: 40px;
+       font-family: '\5FAE\8F6F\96C5\9ED1';
+       padding-left: 40px;
+     }
+     .skip-div{
+        margin-top: 50px;
+        margin-bottom: 100px;
+        font-size: 16px;
+     }
+     .register-title {
+         font-family: '\5FAE\8F6F\96C5\9ED1' !important;
+         font-size: 26px;
+     }
+     a.skip-link{
+        color:#00dad6;
+        margin-left: 20px;
+     }
+     a.skip-link:hover
+     {
+        background-color: transparent;
+        color: #e5014e;
+     }
+/*     footer{
+        width: 100%;
+        position:absolute;
+        bottom:0px;
+     }*/
+     .warning_div, .warning_get_div{
+        color: #e75621;
+        margin-bottom: 20px;
+     }

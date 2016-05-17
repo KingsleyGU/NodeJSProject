@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>小吉首页</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- Mobile viewport optimisation -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- (en) Add your meta data here -->
+    <!-- (de) Fuegen Sie hier ihre Meta-Daten ein -->
+    <link rel="stylesheet" href="yaml/add-ons/accessible-tabs/tabs.css" type="text/css"/>
+    <link href="../css/flexible-grids.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/global.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/xiaoji.css" rel="stylesheet" type="text/css"/>
+    <link href="../yaml/add-ons/accessible-tabs/tabs.css" rel="stylesheet" type="text/css"/>
+    <!--[if lte IE 7]>
+    <link href="../yaml/core/iehacks.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="../lib/html5shiv/html5shiv.js"></script>
+    <![endif]-->
+    <script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  </script>
+    <style type="text/css">
+    .ym-wrapper{
+        width: 1024px;
+    }
+    .user-detail{
+        margin-top: 100px;
+    }
+    .user-icon{
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        margin: 0px;
+        float: left;
+    }
+    .user-title-span,.user-information-span,.statement{
+        display: inline-block;
+        width:60%;
+    }
+    .user-description{
+
+        width: 60%;
+        margin: 0px 0px 0px 40px;
+        display: inline-block;
+
+    }
+    .user-title-span{
+           font:20px/1.8 '\5FAE\8F6F\96C5\9ED1';
+        height: 60px;
+
+    }
+    .user-information-span,.statement{
+        margin-top: -20px;
+        height: 40px;
+    }
+    .opus-collection{
+        margin-top: 40px;
+        width: 100%;
+    }
+    .opus-div,.collection-div,.dynamic-div{
+        display: inline-block;
+        width: 100%;
+        padding: 20px 30px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .opus-img{
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+    }
+    .words-description{
+        width: 100%;
+    }
+    .opus-head-div,.collection-head-div,.dynamic-head-div{
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .dynamic-author,.dynamic-state,.dynamic-time-span,.dynamic-guess-result,.gift-author{
+        font-family:'\5FAE\8F6F\96C5\9ED1' !important;
+    }
+    .dynamic-author,.dynamic-state{
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+    .dynamic-author{
+        font-weight: bold;
+    }
+    .dynamic-time-span
+    {
+        display: inline-block;
+        width: 70%;
+        margin-left: 130px;
+        text-align: left;
+        font-size: 14px;
+        color:#999999;
+    }
+    .dynamic-opus-detail{
+        width: 60%;
+        display: inline-block;
+    }
+    .dynamic-icon-image{
+        width: 90px;
+        height:90px;
+    }
+    .dynamic-opus-image{
+        width: 150px;
+        height:150px;
+    }
+    .dynamic-author-detail,.dynamic-comment-detail{
+        background-color: #eeeeee;
+        padding: 20px;
+        margin: 20px;
+    }
+    .comment-time-span{
+        font-weight:normal;
+        font-size: 14px;
+    }
+    .original-comment{
+     display: inline-block;
+     width: 70%;
+     background-color: #444444;
+     color: #FFFFFF;
+    }
+    .gift-image-div{
+        display: inline-block;
+        width: 30%;
+    }
+    .gift-image{
+        width: 260px;
+        height: 260px;
+        margin-right: 20px;
+    }
+    .more-div{
+        width: 100%;
+    }
+    .more-link{
+        display: block;
+        width: 100px;
+        float: right;
+        margin-right: 100px;
+    }
+   </style>
+
+</head>
+<body>
+    <nav id="nav">
+        <div class="ym-wrapper">
+            <div class="ym-hlist">
+                <div class="logo-div float-left">小吉</div>
+                <form class="ym-searchform" id="nav-search">
+                    <input class="ym-searchfield" type="search" placeholder="关键字" />
+                    <button type="submit" class="ym-button ym-primary">搜索</button>
+                </form>
+                <ul>
+                    <li class="active">
+                        <a href="homepage.html" > <strong>首页</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="drawing.html"> <strong>小吉画画</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="bigtongue.html">
+                            <strong>小吉大舌头</strong>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="res-div float-right">
+                    <a href="#" class="ym-button ym-primary ym-success">登入</a>
+                    <a href="#" class="ym-button ym-primary ym-success">注册</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="ym-wrapper">
+        <div class="user-detail">
+            <img class="user-icon" src="../img/canada.jpg">
+            <div class="user-description">
+                <span class="user-title-span">
+                    <h2>冷色的月光</h2>
+                </span>
+                <span class="user-information-span">男 &nbsp;&nbsp;&nbsp;等级：32 &nbsp;&nbsp;&nbsp;小吉号：111111111</span>
+                <span class="statement">我真的很喜欢画画</span>
+            </div>
+            <div class="opus-div">
+                <div class="opus-head-div">作品</div>
+                <div class="inner-div">
+                    <div class="participant-div">
+                        <a href="#" class="icon-link">
+                            <img id="icon-img" src="http://58.215.160.100:8080/upload/20130114/32c09460-5dbd-11e2-9dd9-00163e017d22.jpg" alt="   icon" class="img-rounded icon-img float-left"></a>
+                        <div class="msg">
+                            <div class="info-name-detail">
+                                <a href="#" class="name-link">赚赚</a>
+                            </div>
+                            <div class="info-desc-detail">
+                                <span>平素上猜猜画画来看画，只觉得乱花迷眼，是真真挑不来，只有尽着那画面新鲜...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <a href="/opus/512c971de4b02d50d0d20376" class="image-link">
+                            <img src="http://58.215.184.18:8080/draw_image/20130226/7fccf820-8004-11e2-adb1-00163e017d23_m.jpg" alt="甄嬛" onload="load(this)" class="image-show"></a>
+                    </div>
+                    <div class="state-div">
+                        <span class="pub-time float-left">2013-02-26</span>
+                        <span class="operating-span float-right">
+                            <img src="../img/flower.png" alt="鲜花" class="default-img">
+                            <span class="img-span">5873</span>
+                            <img src="../img/comment.png" alt="评论" class="default-img">
+                            <span class="img-span">769</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="inner-div">
+                    <div class="participant-div">
+                        <a href="#" class="icon-link">
+                            <img id="icon-img" src="http://58.215.160.100:8080/upload/20130114/32c09460-5dbd-11e2-9dd9-00163e017d22.jpg" alt="   icon" class="img-rounded icon-img float-left"></a>
+                        <div class="msg">
+                            <div class="info-name-detail">
+                                <a href="#" class="name-link">赚赚</a>
+                            </div>
+                            <div class="info-desc-detail">
+                                <span>平素上猜猜画画来看画，只觉得乱花迷眼，是真真挑不来，只有尽着那画面新鲜...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <a href="/opus/512c971de4b02d50d0d20376" class="image-link">
+                            <img src="http://58.215.184.18:8080/draw_image/20130226/7fccf820-8004-11e2-adb1-00163e017d23_m.jpg" alt="甄嬛" onload="load(this)" class="image-show"></a>
+                    </div>
+                    <div class="state-div">
+                        <span class="pub-time float-left">2013-02-26</span>
+                        <span class="operating-span float-right">
+                            <img src="../img/flower.png" alt="鲜花" class="default-img">
+                            <span class="img-span">5873</span>
+                            <img src="../img/comment.png" alt="评论" class="default-img">
+                            <span class="img-span">769</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="inner-div">
+                    <div class="participant-div">
+                        <a href="#" class="icon-link">
+                            <img id="icon-img" src="http://58.215.160.100:8080/upload/20130114/32c09460-5dbd-11e2-9dd9-00163e017d22.jpg" alt="   icon" class="img-rounded icon-img float-left"></a>
+                        <div class="msg">
+                            <div class="info-name-detail">
+                                <a href="#" class="name-link">赚赚</a>
+                            </div>
+                            <div class="info-desc-detail">
+                                <span>平素上猜猜画画来看画，只觉得乱花迷眼，是真真挑不来，只有尽着那画面新鲜...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <a href="/opus/512c971de4b02d50d0d20376" class="image-link">
+                            <img src="http://58.215.184.18:8080/draw_image/20130226/7fccf820-8004-11e2-adb1-00163e017d23_m.jpg" alt="甄嬛" onload="load(this)" class="image-show"></a>
+                    </div>
+                    <div class="state-div">
+                        <span class="pub-time float-left">2013-02-26</span>
+                        <span class="operating-span float-right">
+                            <img src="../img/flower.png" alt="鲜花" class="default-img">
+                            <span class="img-span">5873</span>
+                            <img src="../img/comment.png" alt="评论" class="default-img">
+                            <span class="img-span">769</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="more-div">
+                    <a class="more-link opus-more" href="#">更多</a>
+                </div>
+            </div>
+            <div class="collection-div">
+                <div class="collection-head-div">收藏</div>
+                <div class="inner-div">
+                    <div class="participant-div">
+                        <a href="#" class="icon-link">
+                            <img id="icon-img" src="http://58.215.160.100:8080/upload/20130114/32c09460-5dbd-11e2-9dd9-00163e017d22.jpg" alt="   icon" class="img-rounded icon-img float-left"></a>
+                        <div class="msg">
+                            <div class="info-name-detail">
+                                <a href="#" class="name-link">赚赚</a>
+                            </div>
+                            <div class="info-desc-detail">
+                                <span>平素上猜猜画画来看画，只觉得乱花迷眼，是真真挑不来，只有尽着那画面新鲜...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <a href="/opus/512c971de4b02d50d0d20376" class="image-link">
+                            <img src="http://58.215.184.18:8080/draw_image/20130226/7fccf820-8004-11e2-adb1-00163e017d23_m.jpg" alt="甄嬛" onload="load(this)" class="image-show"></a>
+                    </div>
+                    <div class="state-div">
+                        <span class="pub-time float-left">2013-02-26</span>
+                        <span class="operating-span float-right">
+                            <img src="../img/flower.png" alt="鲜花" class="default-img">
+                            <span class="img-span">5873</span>
+                            <img src="../img/comment.png" alt="评论" class="default-img">
+                            <span class="img-span">769</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="inner-div">
+                    <div class="participant-div">
+                        <a href="#" class="icon-link">
+                            <img id="icon-img" src="http://58.215.160.100:8080/upload/20130114/32c09460-5dbd-11e2-9dd9-00163e017d22.jpg" alt="   icon" class="img-rounded icon-img float-left"></a>
+                        <div class="msg">
+                            <div class="info-name-detail">
+                                <a href="#" class="name-link">赚赚</a>
+                            </div>
+                            <div class="info-desc-detail">
+                                <span>平素上猜猜画画来看画，只觉得乱花迷眼，是真真挑不来，只有尽着那画面新鲜...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <a href="/opus/512c971de4b02d50d0d20376" class="image-link">
+                            <img src="http://58.215.184.18:8080/draw_image/20130226/7fccf820-8004-11e2-adb1-00163e017d23_m.jpg" alt="甄嬛" onload="load(this)" class="image-show"></a>
+                    </div>
+                    <div class="state-div">
+                        <span class="pub-time float-left">2013-02-26</span>
+                        <span class="operating-span float-right">
+                            <img src="../img/flower.png" alt="鲜花" class="default-img">
+                            <span class="img-span">5873</span>
+                            <img src="../img/comment.png" alt="评论" class="default-img">
+                            <span class="img-span">769</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="inner-div">
+                    <div class="participant-div">
+                        <a href="#" class="icon-link">
+                            <img id="icon-img" src="http://58.215.160.100:8080/upload/20130114/32c09460-5dbd-11e2-9dd9-00163e017d22.jpg" alt="   icon" class="img-rounded icon-img float-left"></a>
+                        <div class="msg">
+                            <div class="info-name-detail">
+                                <a href="#" class="name-link">赚赚</a>
+                            </div>
+                            <div class="info-desc-detail">
+                                <span>平素上猜猜画画来看画，只觉得乱花迷眼，是真真挑不来，只有尽着那画面新鲜...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="img-div">
+                        <a href="/opus/512c971de4b02d50d0d20376" class="image-link">
+                            <img src="http://58.215.184.18:8080/draw_image/20130226/7fccf820-8004-11e2-adb1-00163e017d23_m.jpg" alt="甄嬛" onload="load(this)" class="image-show"></a>
+                    </div>
+                    <div class="state-div">
+                        <span class="pub-time float-left">2013-02-26</span>
+                        <span class="operating-span float-right">
+                            <img src="../img/flower.png" alt="鲜花" class="default-img">
+                            <span class="img-span">5873</span>
+                            <img src="../img/comment.png" alt="评论" class="default-img">
+                            <span class="img-span">769</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="more-div">
+                    <a class="more-link collection-more" href="#">更多</a>
+                </div>
+            </div>
+            <div class="dynamic-div">
+                <div class="dynamic-head-div">动态</div>
+                <div id="tabs">
+                    <ul>
+                        <li>
+                            <a href="#tabs-1">作品</a>
+                        </li>
+                        <li>
+                            <a href="#tabs-2">猜</a>
+                        </li>
+                        <li>
+                            <a href="#tabs-3">评论</a>
+                        </li>
+                        <li>
+                            <a href="#tabs-4">送给我</a>
+                        </li>
+                    </ul>
+                    <div id="tabs-1">
+                        <div class="dynamic-author-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">皮皮彭</span>
+                                <span class="dynamic-state">画了一幅画</span>
+                            </div>
+                            <img src="../img/USA.jpg" class="dynamic-opus-image float-right">
+                            <span class="dynamic-time-span">12小时前</span>
+                            <span class="dynamic-guess-result">猜12 &nbsp;&nbsp;&nbsp;猜对9</span>
+                        </div>
+                        <div class="dynamic-author-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">皮皮彭</span>
+                                <span class="dynamic-state">画了一幅画</span>
+                            </div>
+                            <img src="../img/USA.jpg" class="dynamic-opus-image float-right">
+                            <span class="dynamic-time-span">12小时前</span>
+                            <span class="dynamic-guess-result">猜12 &nbsp;&nbsp;&nbsp;猜对9</span>
+                        </div>
+                        <div class="dynamic-author-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">皮皮彭</span>
+                                <span class="dynamic-state">画了一幅画</span>
+                            </div>
+                            <img src="../img/USA.jpg" class="dynamic-opus-image float-right">
+                            <span class="dynamic-time-span">12小时前</span>
+                            <span class="dynamic-guess-result">猜12 &nbsp;&nbsp;&nbsp;猜对9</span>
+                        </div>
+                    </div>
+                    <div id="tabs-2">
+                        <div class="dynamic-author-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">皮皮彭</span>
+                                <span class="dynamic-state">猜对了诗韵的画</span>
+                            </div>
+                            <img src="../img/USA.jpg" class="dynamic-opus-image float-right">
+                            <span class="dynamic-time-span">12小时前</span>
+                            <span class="dynamic-guess-result">猜12 &nbsp;&nbsp;&nbsp;猜对9</span>
+                        </div>
+                        <div class="dynamic-author-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">皮皮彭</span>
+                                <span class="dynamic-state">猜对了诗韵的画</span>
+                            </div>
+                            <img src="../img/USA.jpg" class="dynamic-opus-image float-right">
+                            <span class="dynamic-time-span">12小时前</span>
+                            <span class="dynamic-guess-result">猜12 &nbsp;&nbsp;&nbsp;猜对9</span>
+                        </div>
+                        <div class="dynamic-author-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">皮皮彭</span>
+                                <span class="dynamic-state">猜对了诗韵的画</span>
+                            </div>
+                            <img src="../img/USA.jpg" class="dynamic-opus-image float-right">
+                            <span class="dynamic-time-span">12小时前</span>
+                            <span class="dynamic-guess-result">猜12 &nbsp;&nbsp;&nbsp;猜对9</span>
+                        </div>
+                    </div>
+                    <div id="tabs-3">
+                        <div class="dynamic-comment-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">
+                                    皮皮彭
+                                    <span class="comment-time-span float-right">20小时前</span>
+                                </span>
+                                <span class="dynamic-state">回复小然：你是一个好人</span>
+                                <span class="original-comment">回复老头的评论：两只老虎两只老虎跑得快！</span>
+                            </div>
+                        </div>
+                        <div class="dynamic-comment-detail">
+                            <img src="../img/USA.jpg" class="dynamic-icon-image float-left">
+                            <div class="dynamic-opus-detail">
+                                <span class="dynamic-author">
+                                    皮皮彭
+                                    <span class="comment-time-span float-right">20小时前</span>
+                                </span>
+                                <span class="dynamic-state">回复小然：你是一个好人</span>
+                                <span class="original-comment">回复老头的评论：两只老虎两只老虎跑得快！</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tabs-4">
+                        <div class="gift-image-div">
+                            <img src="../img/USA.jpg" class="gift-image">
+                            <div class="gift-author">作者：老老头</div>
+                        </div>
+                        <div class="gift-image-div">
+                            <img src="../img/USA.jpg" class="gift-image">
+                            <div class="gift-author">作者：老老头</div>
+                        </div>
+                        <div class="gift-image-div">
+                            <img src="../img/USA.jpg" class="gift-image">
+                            <div class="gift-author">作者：老老头</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

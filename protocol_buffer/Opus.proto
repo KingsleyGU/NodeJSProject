@@ -1,0 +1,235 @@
+
+import "GameBasic.proto";
+import "GameConstants.proto";
+import "Sing.proto";
+import "Draw.proto";
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.model";
+option java_outer_classname = "OpusProtos";
+
+
+message PBDrawOpus {
+  // TODO add size here    
+
+  optional int32 level = 1;
+}
+
+//求PS信息
+message PBAskPs {
+	repeated string requirement = 1;                //要求列表，文字描述
+
+    optional int32 awardCoinsPerUser  = 30;         //每PS作品奖励
+    optional int32 awardCoinsMaxTotal = 31;         //PS奖励限额
+    optional int32 awardIngotBestUser = 32;         //最佳PS奖励
+
+    optional string awardBestUserId   = 50;         //最佳作品用户
+}
+
+//求PS作品
+message PBAskPsOpus {
+    required string askPsId = 1;                    // 关联的求PS的ID
+}
+
+enum PBLanguage{
+    CHINESE = 1;
+    ENGLISH = 2;
+}
+
+enum PBOpusType{
+
+	UNKNOWN = 0;
+	DRAW = 1;
+	GUESS = 2;
+	COMMENT = 3;
+	REPOST = 4;                         // useless at this moment
+    DRAW_TO_USER = 5;
+	FLOWER = 6;                         // align with ItemTypeFlower
+	TOMATO = 7;                         // align with ItemTypeTomato
+    ONLY_COMMENT = 8;                   // TODO check what it is
+    DRAW_CONTEST = 9;
+    
+    SING = 1000;
+    SING_TO_USER = 1001;
+    SING_CONTEST = 1002;
+    
+    ASK_PS = 1500;                      // 求PS作品
+    ASK_PS_OPUS = 1501;                 // 求PS的PS作品
+}
+
+enum PBOpusStoreType{
+    NORMAL_OPUS = 0;                    
+    DRAFT_OPUS  = 1;                    // 本地草稿
+    SUBMIT_OPUS = 2;                    // 已经提交的作品
+    SAVED_OPUS  = 3;                    // 收藏的作品
+}
+
+enum PBOpusStatus{
+
+    OPUS_STATUS_NORMAL = 0;
+    OPUS_STATUS_DELETE = 1;
+}
+
+enum PBFeedTimesType{
+
+    FEED_TIMES_TYPE_MATCH = 1; 
+    FEED_TIMES_TYPE_GUESS = 2;
+    FEED_TIMES_TYPE_CORRECT = 3;
+    FEED_TIMES_TYPE_COMMENT = 4;
+    FEED_TIMES_TYPE_FLOWER = 5;
+    FEED_TIMES_TYPE_TOMATO = 6;
+    FEED_TIMES_TYPE_SAVE = 7;
+}
+
+message PBOpus {
+
+  required string opusId = 1;                   // 作品Id
+  optional PBOpusType type = 2;                 // 作品类型
+  optional string name = 3;                     // 作品名称
+  optional string desc = 4;                     // 作品描述
+  optional string image = 5;                    // 作品图片
+  optional string thumbImage = 6;               // 作品缩略图
+  optional string dataUrl = 9;                  // 作品数据远程URL
+  
+  optional PBLanguage language = 10;            // 作品语言
+  optional PBOpusCategoryType category = 11;    // 作品大分类
+
+  optional int32 createDate = 15;               // 作品创建时间
+  optional int32 status = 20[default=0];        // 作品状态，0表示正常，1表示已删除。
+  
+  repeated string tags = 21;                    // 作品标签，用于作品分类，如搞笑，故事等。
+  optional int32  spendTime = 22;               // 制作作品花费的时间
+
+  // 创建来源信息，如来自哪些设备、应用
+  optional int32  deviceType = 25;               // deviceType : (1:iPhone/iPod Touch, 2:iPad, 3:Android Phone)
+  optional string deviceName = 26;               // 设备名称，如 iPhone4, New iPad, iPhone5, 三星Galaxy 等等
+  optional string appId = 28;                    // 来自哪个应用创作的
+
+  optional PBGameUser author = 35;              // 作者基本信息
+
+  optional PBGameUser targetUser = 41;          // 作品是给谁的
+  optional string contestId = 42;               // 参与的比赛的Id
+
+  repeated PBFeedTimes feedTimes = 45;          // 作品操作统计信息
+
+  optional PBDrawOpus draw = 101;                // 画画特有信息
+  optional PBSingOpus sing = 102;                // 唱歌特有信息
+  optional PBAskPs    askPs = 103;               // 求PS
+  optional PBAskPsOpus askPsOpus = 104;          // 求PS作品
+  
+  // for local draft & opus storage
+  optional string localDataUrl = 150;              // 保存数据文件的本地路径URL
+  optional string localImageUrl = 151;             // 本地图片的大图路径
+  optional string localThumbImageUrl = 152;        // 本地图片的小图路径
+  optional bool   isRecovery = 153[default=false]; // 是否是自动恢复的草稿
+
+  optional PBOpusStoreType storeType = 200;      // 当前保存类型
+  
+  optional PBLabelInfo descLabelInfo = 201;  
+  optional PBSize canvasSize = 202;     
+  
+  optional PBOpusGuess guessInfo = 250;                 // 用户猜的信息
+}
+
+
+
+//message PBOpusAction{
+//    required string actionId = 1;
+//    optional PBOpusActionType actionType = 2;       
+//    
+//    optional PBGameUser userInfo = 6;               // 评论人的信息
+//    optional PBOpus opus = 7;                       // 评论的作品的详细信息 only used in local
+//
+//    optional int32 createDate = 11;                 // 评论的创建时间
+//
+//    optional PBOpusAction sourceAction = 15;        // 原评论的内容
+//
+//
+//    //content
+//    optional PBActionComment commentAction = 51;    // 评论
+//    optional PBActionFlower flowerAction = 52;      // 鲜花
+//    optional PBActionGuess guessAction = 53;        // 猜
+//}
+
+//message PBActionComment{
+//    optional string content = 1;                    // 评论内容
+//}
+//
+//message PBActionFlower{
+//    required int32 type = 1 ;                       // 1 for current flower
+//}
+//
+//message PBActionGuess{
+//    repeated string words = 1;                      // 猜过的词
+//    optional bool correct = 2;                      // 是否猜中？
+//}
+//
+//
+//message PBActionTimes{
+//    required PBOpusActionType type  = 1;            // 操作类型
+//    optional string name  = 2;                      // 名字
+//    optional int32  value = 3[default=0];           
+//}
+//
+//message PBTimeline
+//{
+//    optional PBOpus opus = 1;                       
+//    optional PBOpusAction action = 2;               //only guess action
+//}
+
+message PBOpusList{
+
+    repeated PBOpus opuses = 1;
+}
+
+message PBOpusGuess{
+
+    optional bool isCorrect = 2 [default = false];         // 已经猜中过
+}
+
+enum PBRankType{
+   HOT_RANK = 1;
+   ALL_TIME_RANK = 2;
+}
+
+enum PBUserGuessMode{
+
+   GUESS_MODE_HAPPY = 1;
+   GUESS_MODE_GENIUS = 2;
+   GUESS_MODE_CONTEST = 3;
+}
+
+message PBGuessRank{
+
+   optional PBGameUser user = 1;    
+
+   optional int32 guess = 5;         // 猜的总次数
+   optional int32 pass = 6;          // 一共通过了多少关
+   optional int32 spendTime = 7;     // 总耗时
+   
+   optional int32 earn = 11;         // 赢得了多少
+   optional PBGameCurrency currency = 12;    // 货币种类
+
+   optional int32 ranking = 25;         // 排名
+   optional int32 totalPlayer = 31;     // 总共参赛人数
+   optional int32 startTime = 35;       // 开始时间
+   optional int32 endTime = 36;         // 结束时间
+}
+
+enum PBGuessContestState{
+
+   GUESS_CONTEST_STATE_END= 0;          // 比赛已经结束
+   GUESS_CONTEST_STATE_ING = 1;         // 比赛进行中
+   GUESS_CONTEST_STATE_NOT_START = 2;   // 比赛还没开始
+}
+
+message PBGuessContest{
+   
+   required string contestId = 1;
+   optional string name = 2;
+   optional int32 state = 3;
+   
+   optional int32 startTime = 5;
+   optional int32 endTime = 6;
+}

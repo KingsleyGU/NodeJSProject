@@ -1,0 +1,139 @@
+   a.title-link{
+    color:#000;
+    font-size:20px;
+
+    width:20%;
+    text-align:center;
+    font-weight:bold;
+   }
+   .description-div{
+    width:75%;
+    margin:0 auto;
+    padding-bottom:40px;
+    margin-bottom:20px;
+   }
+   .time-span,.information-detail{
+    margin-top:10px;
+    font-size:13px;
+    color:#aaa;
+   }
+   ul,li{
+    list-style:none;
+    padding:0px;
+    margin:0px;
+   }
+   .original-image {
+    width:70%;
+   }
+   .icon-image{
+          width:60px;
+        height:60px;
+        float:left;
+        margin-right:15px;
+   }
+   .personal-information{
+    margin: 0px;
+    line-height: 25px;
+   }
+   .discuss-item{
+    height:50px;
+    margin-top:20px;
+    padding-bottom: 20px;
+    margin-bottom:20px;
+   }
+   .comment-content{
+    padding-bottom:10px;
+   }
+   .info{
+    padding-bottom:60px;
+    padding-left:40px;
+   }
+   .message{
+    width:70%;
+   }
+   .ym-fbox {
+    margin-top:60px;
+   }
+   .disscuss-div{
+    width:70%;
+   }
+   .media-method-item,.media-method-list{
+    display:inline;
+   }
+   .media-img{
+         width:32px;
+     height:32px;
+     margin-right:20px;
+     -webkit-box-reflect: below 5px -webkit-gradient(linear, 
+    left top, left bottom, color-stop(10%,rgba(255, 255, 255, 0.0)), 
+    color-stop(80%,rgba(255, 255, 255, 0.20)),
+    color-stop(100%,rgba(255, 255, 255, .5)));
+   }
+   a.media-icon:hover{
+    background-color: transparent;
+   }
+   .share-div{
+    padding-left: 40px;
+   }
+   .workshop-div{
+    border-radius:5px;
+    margin-top:100px;
+    padding-top:40px;
+    background-image:url(images/bg.jpg);
+   }
+   .workshop-title,.sub-workshop-title{
+    font-size:20px;
+    font-weight: bold;
+   }
+   .sub-icon-image{
+         width:60px;
+        height:60px;
+   }
+   a:hover,a:visited{
+    border:0px solid #FFF;
+    background-color: transparent;
+   }
+   .owner-info{
+    display:block;
+    padding-left:20px;
+   }
+   .achievement{
+    font-weight: bold;
+    font-size: 17px;
+    padding-top: 20px;
+   }
+   .word-span{
+    display: block;
+    padding-top:15px;
+    font-size:20px;
+   }
+   .gallery-div{
+    padding-top:40px;
+    padding:40px 60px 40px 60px;
+   }
+   .workshop-link-item,.workshop-link-list{
+    display: inline;
+   }
+   .workshop-img{
+    width:70px;
+    height:70px;
+   }
+     .QR-code{
+     position:fixed;
+     width:120px;
+     padding-top:10px;
+     height:120px;
+     top:35%;
+     right:0px;
+     padding-left:10px;
+     border-radius:5px;
+     background-color:#FFF;
+     z-index:1030px;
+     margin:0 auto;
+     }
+     .code{
+     right:0px;
+     margin:0 auto;
+     width:100px;
+     height:100px;
+     }

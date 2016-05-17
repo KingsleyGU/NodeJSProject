@@ -1,0 +1,47 @@
+nav#nav
+    if login_user != null
+      .ownerId(style="display:none;") #{login_user.userId}
+      .ownerNick(style="display:none;") #{login_user.nickName}
+      .ownerAvatar(style="display:none;") #{login_user.avatar}
+      if login_user.gender
+        .ownerGender(style="display:none;") 1
+      else
+        .ownerGender(style="display:none;") 0
+    .ym-wrapper.nav-wrapper
+        .ym-hlist
+          span(style="display:none;")
+             script
+                  var _bdhmProtocol1 = (("https:" == document.location.protocol) ? " https://" : " http://");
+                  document.write(unescape("%3Cscript src='" + _bdhmProtocol1 + "hm.baidu.com/h.js%3Fac441b9a667dd1fb72589c05ef3b3fdf' type='text/javascript'%3E%3C/script%3E"));
+                  var _bdhmProtocol2 = (("https:" == document.location.protocol) ? " https://" : " http://");
+                  document.write(unescape("%3Cscript src='" + _bdhmProtocol2 + "hm.baidu.com/h.js%3F26070715064204eebae9d61e3e5d14dc' type='text/javascript'%3E%3C/script%3E"));
+          .logo-div.float-left
+            a.logo-img-link(href='/')
+              img.logo-img(src='../img/little_gee.png' alt="小吉")
+          .nav-arrangement
+            ul
+              li#nav-page-list.nav-ui-active.nav-page-list1
+                a.nav-ui-link.nav-ui-link1(href='/')
+                   首页
+              li#nav-page-list.nav-page-list2
+                a.nav-ui-link.nav-ui-link2(href='/drawing')
+                   小吉画画
+              li#nav-page-list.nav-page-list3
+                a.nav-ui-link.nav-ui-link3(href="#")
+                   小吉大舌头
+            img.triangle-img.tri-img-1#triangle-img(src='../img/triangle.png' alt="指向图标")
+            form#nav-search.ym-searchform(style='display: none;')
+              span
+                img#search-img.search-img(src='../img/search.png' alt="搜索图标")
+              input#form_id.ym-searchfield(name='name', type='search', placeholder='', onfocus='searchDisapper()', onblur='searchBack()')  
+            .res-div.float-right
+              if login_user == null
+                  a.ym-nav-button(href='/login') 登录
+                  a.ym-nav-button(href='/register') 注册 
+              else
+                 span.welcome_span Welcome,
+                 span.user-link-span
+                   a.nav-user-link(href="/user_detail/"+ login_user.userId) #{login_user.nickName}
+                 a.ym-nav-button(href='/logout') 登出
+
+    .bottom-nav

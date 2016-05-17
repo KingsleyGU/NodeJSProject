@@ -1,0 +1,106 @@
+
+// display user list
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+          
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span8
+                .container
+                    table.table.table-bordered.table-hover#user_table
+                       - if (user_list != null && user_list.length > 0)
+                         thead
+                             tr.success
+                                 td 操作
+                                 td 头像
+                                 td 用户ID
+                                 td 小吉
+                                 td 昵称
+                                 td 性别
+                                 td 金币
+                                 td 城市
+                                 td 邮件
+                                 td 新浪微博
+                                 td 腾讯微博
+                                 td 等级
+                                 //td LV 诈金花                                
+                         tbody
+                             - user_list.forEach(function(user) {
+                                 tr.info(id='#{user.uid}')
+                                     td
+                                        .btn-group
+                                            button.btn.dropdown-toggle(data-toggle="dropdown",id="user_action")
+                                                点击
+                                            ul.dropdown-menu
+                                              li
+                                                a(href="/charge?uid=#{user.uid}&type=0") 充值金币
+                                              li
+                                                a(href="/charge?uid=#{user.uid}&type=1") 充值元宝
+                                              li
+                                                a(href="/setXiaoji?uid=#{user.uid}&nickname=#{user.nn}") 设置小吉号码
+                                              li
+                                                a(href="/resetPassword?uid=#{user.uid}&nickname=#{user.nn}") 重置密码
+                                              li
+                                                a(href="/sendMessage?uid=#{user.uid}") 发送消息
+                                              li.divider
+                                              li
+                                                a(href="/blacklist?uid=#{user.uid}") 黑名单
+                                     
+                                     td 
+                                       - if (!user.av) 
+                                         无头像
+                                       - else
+                                         a(href="#{user.av}")
+                                            img(src="#{user.av}", alt="点击看大图", height="57px", width="57px")
+                                     td  #{user.uid}
+                                     td
+                                       - if (!user.xn) 
+                                         无
+                                       - else
+                                         #{user.xn}
+                                     td  #{user.nn}
+                                     td
+                                       - if (user.ge)
+                                           - if (user.ge == 'f')
+                                             女
+                                           - else
+                                             男
+                                     td  #{user.ab}
+                                     td
+                                       - if (!user.lo) 
+                                         未知
+                                       - else
+                                         #{user.lo}
+                                     td  #{user.em}
+                                     td  #{user.sn}
+                                     td  #{user.qn}
+                                     td  #{user.lvl}
+                                     //td  #{user.lif[0].level}
+                                     //td  #{user.lif[1].level}
+                             - })
+                       - else
+                           p
+                             h2 没有搜索到符合条件的用户数据 
+                                
+    include ../includes/foot    
+    include ../includes/script   
+
+// all js must add below the jQuery and Boostrap JS, otherwize they don't work     
+// add click table row function handler here, powered by jQuery    
+script
+    $("button").click(function(e) { 
+         e.preventDefault();    
+         
+         if (this.id === 'user_action') { 
+            $('.dropdown-toggle').dropdown();
+         }
+    });
+    

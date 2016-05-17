@@ -1,0 +1,19 @@
+doctype html
+html
+  head  
+    meta(name='keywords', content='小吉，画画，工具，社区')
+    meta(name='description', content='小吉画画，绘画工具，绘画社区，小吉画画是目前国内最好的手机和平板电脑上的绘画工具和社区App，提供最为优秀的绘画工具，最富有人气的绘画互动娱乐社区，还提供画画比赛，家族等强大功能') 
+    include ../includes/head  
+    link(href='../css/homepage/homepage.css', rel='stylesheet', type='text/css') 
+    link(href='../css/drawing/drawing.css', rel='stylesheet', type='text/css')
+  body
+    include ../includes/top_bar
+    include drawing_main        
+    include ../includes/foot    
+    include ../includes/script 
+    script(src="../js/homepage/homepage-json.js")
+    script(src="../js/homepage/poster.js") 
+    script(src="../js/drawing/drawing.js") 
+    script 
+      $(function() {   $( "#tabs" ).tabs({ active: 1 });  });
+

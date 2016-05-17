@@ -1,0 +1,43 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span9
+                .hero-unit
+                    form.form-horizontal(method='post', action='./doGetBulletins')
+                        div.control-group
+                            div.controls
+                                h2  查看公告
+                        div.control-group
+                            label.control-label(for="game_id") 选择应用
+                            div.controls
+                                select(name='game_id')
+                                   option Draw
+                                   option Zhajinhua 
+                                   option Dice 
+                                   option Learndraw 
+                                   option Puredraw  
+                                   option Puredrawfree 
+                                   option Photodraw 
+                                   option Photodrawfree
+                                   option DreamAvatar 
+                                   option DreamAvatarFree
+                                   option DreamLockscreen 
+                                   option DreamLockscreenFree
+                                   option CallTrack 
+                                   option SecureSms 
+                                   option Sing 
+                        div.control-group
+                            div.controls
+                                input.btn-danger(type='submit', value=' 确 定 ')   
+            
+    include ../includes/foot    
+    include ../includes/script    

@@ -1,0 +1,86 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span9
+                .hero-unit
+                    form.form-horizontal(method='post', action='./blacklistOp')
+                        div.control-group
+                            div.controls
+                                h2  黑名单
+                        div.control-group
+                            label.control-label(for="app") 应用 
+                            div.controls
+                                select(name='app')
+                                   option draw
+                                   option zjh 
+                                   option old-dice
+                                   option new-dice
+                                   option little-gee 
+                                   option learn-draw
+                                   option pure-draw-free
+                                   option pure-draw
+                                   option photo-draw-free
+                                   option photo-draw
+                                   option call-back
+                                   option secure-sms 
+                                   option dream-avatar-free
+                                   option dream-avatar
+                                   option dream-lock-screen-free
+                                   option dream-lock-screen
+                        div.control-group
+                            label.control-label(for="action") 请选择操作 
+                            div.controls
+                                select(name='action')
+                                    option 添加
+                                    option 解除
+                        div.control-group
+                            label.control-label(for="type") 请选择类型 
+                            div.controls
+                                select(name='type')
+                                    option 用户
+                                    option 设备 
+                        // 注释掉部分是以复选框形式展示的
+                        //div.control-group
+                        //    label.control-label(for='action') 请选择操作 
+                        //    div.controls
+                        //        label.checkbox.inline
+                        //            input#inlineCheckbox1(type='checkbox', value='0', name='add')
+                        //            添加
+                        //        label.checkbox.inline
+                        //            input#inlineCheckbox2(type='checkbox', value='1', name='remove')
+                        //            解除 
+                        //div.control-group
+                        //    label.control-label(for='action') 请选择类型
+                        //    div.controls
+                        //        label.checkbox.inline
+                        //            input#inlineCheckbox1(type='checkbox', value='0', name='user')
+                        //            用户
+                        //        label.checkbox.inline
+                        //            input#inlineCheckbox2(type='checkbox', value='1', name='device')
+                        //            设备 
+                        div.control-group
+                          - if (dying_guy == null)
+                            label.control-label(for='dying_guy')
+                                用户ID
+                            div.controls
+                                input#id(type='text', placeHolder='要添加/解除的用户ID', name='dying_guy')
+                          - else
+                            label.control-label(for='dying_guy')
+                                用户ID
+                            div.controls
+                                textarea#id(rows="1", name='dying_guy') #{dying_guy}
+                        div.control-group
+                            div.controls
+                                input.btn-danger(type='submit', value=' 确 定 ')   
+            
+    include ../includes/foot    
+    include ../includes/script    

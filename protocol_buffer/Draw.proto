@@ -1,0 +1,329 @@
+
+import "GameBasic.proto";
+import "GameConstants.proto";
+import "Sing.proto";
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.model";
+option java_outer_classname = "DrawProtos";
+
+
+message PBLayer{
+    required int32 tag = 1;
+    repeated float rectComponent = 2;
+    optional float alpha = 3 [default = 1];
+    optional string name = 4;
+}
+
+//// internal usage, to store draw data
+message PBDraw {
+  required string userId = 1;    
+  required string word = 2;
+  required int32 level = 3;
+  required int32 language = 4;                      // 1 Chinese, 2 English
+  optional int32 createDate = 5;
+  optional string nickName = 6;
+  optional string avatar = 7;
+  optional bool   gender = 8;
+  
+  optional int32 version = 9 [default=0];           // draw data version
+
+  repeated PBDrawAction drawData = 10;  
+  optional string opusId = 11;
+  optional int32 score = 12;                        // draw word score
+
+  optional bool isCompressed = 19[default=true];    // is draw data points compressed, default is TRUE (old data)
+
+  optional PBSize canvasSize = 21;                        // draw rect size
+  repeated PBLayer layer = 22;
+  
+}
+
+message PBFeedTimes{
+  required int32 type  = 1;
+  required int32 value = 2;
+}
+
+//表示评论的内容，用于评论的回复
+message PBCommentInfo
+{
+    required int32  type = 1;            //表示类型，例如是评论/回复评论/回复鲜花/回复番茄…  required
+    optional string comment = 2;         //评论的内容
+    required string actionId = 3;        //被评论的action的id               required
+    required string actionUserId = 4;    //被评论的action的用户uid
+    optional string actionNickName = 5;  //被评论的action的用户的nickName
+    optional string actionSummary = 6;   //action的简单摘要
+}
+
+message PBLearnDraw{
+    required string opusId = 1;
+    optional int32 type = 2;
+    optional int32 price = 3;
+    optional int32 boughtCount = 4;
+}
+
+message PBLabelInfo{
+   
+   optional PBRect frame = 1;
+
+   optional int32 textColor = 4;          // 文本颜色。
+   optional float textFont = 5;           // 文本字体大小
+
+   optional int32 style = 20;
+
+   optional int32 textStrokeColor = 21;    // 外圈颜色。
+}
+
+message PBFeed {
+  required string feedId = 1;
+  required string userId = 2;           // 用户Id
+  required int32  actionType = 3;       // 作品类型，普通，送给好友，参与比赛，送鲜花，猜画，评论。
+
+  required int32  createDate = 4;       // 作品创建日期
+  optional int32  deviceType = 5;       // deviceType : (1:iPhone/iPod Touch, 2:iPad, 3:Android Phone)
+  optional string deviceName = 6;       // 设备名称，如 iPhone4, New iPad, iPhone5, 三星Galaxy 等等
+  optional string gameId = 7;           // 来自哪个游戏
+  optional PBOpusCategoryType category = 8;    // 作品大分类
+
+
+  // for user info
+  optional string nickName = 21;        // 用户昵称
+  optional string avatar = 22;          // 用户头像
+  optional bool   gender = 23;          // 用户性别
+  optional string signature = 24;       // 用户签名，新增 2013-4-1
+
+  // for user draw
+  optional PBDraw drawData = 31;            // 画画数据，已弃用
+
+  optional string targetUserId = 32;        // 画给谁
+  optional string targetUserNickName = 33;  // 画给谁
+  optional double historyScore = 34;        // 指示该作品的历史总得分
+  optional string opusDesc = 35;            // 作品描述
+  
+  optional string drawDataUrl = 36;         // 新增，用于返回数据文件的URL
+  repeated string tags = 37;                // 作品标签，用于作品分类，如搞笑，故事等。
+  optional int32  spendTime = 38;           // 制作作品花费的时间
+
+  // for user guess
+  optional string opusId = 41;              // 猜作品的Id
+  optional bool   isCorrect = 42;           // 是否猜对了？
+  optional int32  score = 43;               // 得分？
+  repeated string guessWords = 44;          // 猜过的词
+  optional int32  opusStatus = 45;          // 作品的状态：0：正常；1：已删除
+  
+  // for user comment
+  optional string comment = 51;             // 旧版本使用comment字段，展示评论内容
+  optional PBCommentInfo commentInfo = 52;  // 新版本使用commentInfo结构，支持评论内容和被评论的内容
+    
+  // common data
+  optional int32  matchTimes = 61;          // 已弃用
+  optional int32  correctTimes = 62;        // 已弃用
+  optional int32  guessTimes = 63;          // 已弃用
+  optional int32  commentTimes = 64;        // 已弃用
+
+  repeated PBFeedTimes feedTimes = 65;      // 记录各种次数类型，如用户番茄数目
+
+  // for creator user & opus info
+  optional string opusCreatorUserId = 71;       // 作品创建者Id
+  optional string opusCreatorNickName = 72;     // 作品创建者昵称
+  optional bool   opusCreatorGender = 73;       // 作品创建者性别
+  optional string opusCreatorAvatar = 74;       // 作品创建者头像
+
+  // for creator user & opus info
+  optional string opusWord = 81;                // 作品名称
+  optional string opusImage = 82;               // 作品图片
+  optional string opusThumbImage = 83;          // 作品小图
+  
+  optional string dataUrl = 84;                 // 作品数据URL，画画或者唱歌文件的绝对路径
+  
+  // for contest information
+  optional string contestId = 91;               // 参与的比赛的Id
+  optional double contestScore = 92;            // 参与的比赛的分数
+  repeated PBOpusRank rankInfo = 93;            // 比赛打分
+  optional int32  rankInTop = 94;               // 在排行榜中的排名，比如比赛排名、周榜排名等，用于返回
+
+  //for learn Draw
+  optional PBLearnDraw learnDraw = 100;
+  optional PBSingOpus sing = 101;               // 唱歌特有信息
+
+  optional PBLabelInfo descLabelInfo = 200;
+  optional PBSize canvasSize = 201;
+  
+
+}
+
+message PBPoint
+{
+  required float x = 1;
+  required float y = 2;
+}
+
+message PBColor
+{
+  required float red = 1;
+  required float blue = 2;
+  required float green = 3;
+  required float alpha = 4;
+}
+
+message PBNoCompressDrawAction{
+    required int32 type = 1;                 // 0 : draw, 1 : clean draw
+
+    //deprecated attribute
+    repeated PBPoint point = 2;
+    
+    //deprecated attribute
+    optional PBColor color = 3;
+
+    optional float width = 4;
+    optional int32 penType = 5;
+
+    // Start from draw version == 2
+    //support shape, shape info
+
+    optional int32 shapeType = 6;
+    repeated float rectComponent = 7; //startX, startY, endX, endY
+
+    optional PBSize canvasSize = 8; //canvas size, supported after version 2
+
+    // Point X, Y
+    repeated float pointX = 11;
+    repeated float pointY = 12;
+    
+    // Color RGB & Alpha
+    optional uint32 rgbColor = 20;
+
+    // Not Used Anymore, to be deleted
+    optional float red = 21;
+    optional float blue = 22;
+    optional float green = 23;
+    optional float alpha = 24;
+
+
+
+}
+
+
+//only used to store the draft data
+
+message PBNoCompressDrawData
+{
+    //deprecated attribute
+    repeated PBNoCompressDrawAction drawActionList = 1;
+
+    optional int32 version = 2 [default=0];      // draw data version
+
+    optional PBSize canvasSize = 4;
+
+    repeated PBDrawAction drawActionList2 = 5; //use after version 2.0
+    optional PBUserBasicInfo drawToUser = 6;
+    optional string opusDesc = 7;
+    optional string bgImageName = 8;
+
+    repeated PBLayer layer = 9; // used after version 7.0
+}
+
+
+message PBDrawBgGroup
+{
+    required int32 groupId = 1;
+    repeated PBDrawBg drawBgs = 2;
+    repeated PBLocalizeString name = 3;    
+}
+
+message PBDrawBgMeta
+{
+    repeated PBDrawBgGroup drawBgGroup = 1;
+}
+
+message PBImageShapeGroup
+{
+    required int32 groupId = 1;
+    repeated PBLocalizeString groupName = 2;
+    repeated int32 shapeType = 3 [packed=true];
+//    optional string fileNamePrefix = 4;
+}
+
+message PBImageShapeGroupMeta
+{
+    repeated PBImageShapeGroup imageShapeGroup = 1;
+}
+
+message PBHotWord
+{
+  required string wordId = 1;
+  required string word = 2;
+  optional int32 coins = 3[default=0];
+  
+  optional string source = 10;
+}
+
+message PBHotWordList
+{
+  repeated PBHotWord words = 1;
+}
+
+
+message PBWallOpus
+{
+    required int32 idOnWall = 1;        // 在墙上的位置,从0开始
+    optional PBFeed opus = 2;           // 作品
+    optional PBFrame frame = 3;         // 框
+}
+
+message PBWall{
+  required string wallId = 1;                       
+  required PBWallType type = 2;                 // 墙的类型,
+
+  required string userId = 3;                   // 画墙所有者的id
+  optional string name = 6;                     // 画墙名称
+  
+  optional PBLayout content = 7;                // 画墙内容
+
+  optional string musicUrl = 10;                // 背景音乐
+}
+
+message PBRect
+{
+  optional int32 x = 11;
+  optional int32 y = 12;
+  optional int32 width = 13;
+  optional int32 height = 14;
+}
+
+message PBFrame{
+  required int32 frameId = 1;
+  optional int32 type = 2;                      // 框的类型
+  
+  optional string imageUrl = 10;                // 框的背景URL
+
+  optional PBRect opusIphoneRect = 13;          // 作品相对于框的frame
+  optional PBRect opusIpadRect = 14;            // 作品相对于框的frame
+  
+  optional int32 price = 18;                    // 框的价格
+}
+
+message PBFrameList{
+  repeated PBFrame frames = 1;
+}
+
+
+
+message PBLayout{
+  required int32  layoutId = 1;
+  optional string name = 2;                         // 布局名称
+
+  optional int32  displayMode = 3;                  // 展示方式
+
+  repeated PBWallOpus wallOpuses = 5;               // 作品
+  
+  optional string imageUrl = 7;                     // 背景URL
+  
+  optional int32 price = 18;                        // 价格
+}
+
+message PBLayoutList{
+  repeated PBLayout layouts = 1;
+}
+

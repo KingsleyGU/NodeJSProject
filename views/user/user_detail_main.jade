@@ -1,0 +1,97 @@
+script
+  var userId = "#{user.userId}";
+
+.ym-wrapper
+  .user-detail
+      - var avatar = user_manager.getUserAvatar(user.avatar, user.gender);
+      img.user-icon(src='#{avatar}' alt="小吉画画用户头像")
+      .user-description
+        - var xiaojiNum = "";
+        if user.xiaojiNumber!= null
+           xiaojiNum = "("+ user.xiaojiNumber + ")";
+        span.user-title-span  
+          span.nick-span #{user.nickName} 
+          span #{xiaojiNum}
+        - var gender = "男";
+        if !user.gender
+           gender = "女";
+        span.user-info
+          span.user-information-span #{gender} 
+          span.level-span 等级 #{user.userLevel}
+          span.fans-span
+        span.statement #{user.signature} 
+        if !login_user 
+          span.float-right.follow-button-span
+             a.follow-link(href="/login?from=/user_detail/"+'#{user.userId}') 关注
+        else
+          if login_user.userId != user.userId
+            span.float-right.follow-button-span
+               a.follow-button 关注
+          else
+            span.modify_information-span
+               button.modify_information(href="#") 编辑        
+      .modify-personal-information(style="display:none;")
+        .icon-div.float-left()
+          .upload-div#upload-div(style="background-image:url(#{avatar});")
+            form.avatar-form(method="post",enctype="multipart/form-data",
+            action = "/a/avatar")
+              input.upload-avatar(type="file", name="displayImage", accept="image/*")
+          br
+          label.avatar-message 
+        .username-account
+          label.username-message 昵称
+          input.modify-username(type="text" value="#{user.nickName}")
+        .gender-level-fans
+          label.gender-message 性别
+          input.gender-selected(type="hidden" value="f")
+          span.gender-choice-span 
+            img.female-img.gender-img(src="../img/remember-click.png")
+          .gender-word  女
+          span.gender-choice-span 
+            img.male-img.gender-img(src="../img/remember.png")
+          .gender-word 男
+        .description-status.float-left
+          label.status-message 签名
+        textarea.user-status(rows='4' cols='60' ) #{user.signature}  
+        span.submit-modify_information-span
+          button.submit-modify_information 提交 
+          button.cancel-modify_information 取消   
+      br.division-break
+      br.division-break
+      span.line-span
+         hr.span-hr
+      .opus-head-div 
+          span.title-name.opus-title-name 作品
+      span.line-span
+         hr.span-hr         
+      .opus-div
+        .opus-loading-div.center 
+           img.center(src='../img/loading.gif', alt='载入中' style="padding-right:40px;")
+        .opus-body-div
+      .more-div.opus_more_div
+         button.more-link.opus-more 更多>>
+      br
+      span.line-span
+         hr.span-hr
+      .collection-head-div 
+          span.title-name.collection-title-name 收藏
+      span.line-span
+         hr.span-hr 
+      .collection-div
+        .collection-loading-div.center 
+           img.center(src='../img/loading.gif', alt='载入中' style="padding-right:40px;")
+        .collection-body-div
+      .more-div.collection_more_div
+          button.more-link.collection-more 更多>>
+      .template-div(style="display:none;")
+        .inner-div#inner-div(style="display:none;")
+          .img-div
+            a.image-link(href='/opus/512c971de4b02d50d0d20376')
+              img.image-show#image-show(onload='load_big_size(this)')
+          .state-div
+            span.pub-time.float-left 2013-02-26
+            span.operating-span.float-right
+              img.default-img(src='../img/flower.png', alt='鲜花')
+              span.img-span.flower_times_span 5873
+              img.default-img(src='../img/comment.png', alt='评论')
+              span.img-span.comment_times_span 769

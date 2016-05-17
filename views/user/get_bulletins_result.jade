@@ -1,0 +1,38 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+          
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span8
+                .container
+                    - if (bulletins.length != 0) {
+                      h2.text-center 最新#{bulletins.length}条公告(30天内)
+                      table.table.table-bordered#user_charge_result
+                          thead
+                              tr.success
+                                  td 时间 
+                                  td 公告内容 
+                          tbody
+                              - for(var i = 0; i < bulletins.length; i++) {
+                                    tr.info
+                                      td= bulletins[i].create_date
+                                      td= bulletins[i].content
+                              - }
+                    - } else {
+                      h2 抱歉! 30天内暂无公告!
+                    - }
+
+    include ../includes/foot    
+    include ../includes/script   
+
+// all js must add below the jQuery and Boostrap JS, otherwize they don't work     
+// add click table row function handler here, powered by jQuery    
+script

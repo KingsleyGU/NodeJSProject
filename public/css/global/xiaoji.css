@@ -1,0 +1,102 @@
+  .img-div{
+    width: 290px;
+    height:290px;
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+     .inner-div{
+      margin:20px 19px;
+      padding-top: 15px;
+     border-radius:15px;
+     width:290px;
+     float:left;
+     background-color:#FFFFFF;
+     padding-bottom: 5px;
+     }
+     .name-div{
+        text-align:center;
+     }
+
+     a.name-link{
+        color:#4e4e4e !important;
+        text-decoration: none;
+        display: block;
+        height: 20px;
+      overflow: hidden;
+      padding: 5px 0px;
+      font-weight: bold;
+      font-size: 18px;
+
+     }
+     a.name-link:hover{
+        color:#FF0000 !important;
+        background-color: transparent;
+        text-decoration: none;
+     }
+     .icon-img{  
+        width:60px;
+        height:60px;
+        border-radius: 30px;
+        margin-right: 15px;
+     }
+     .participant-div{
+         font:13px/1.8 'Optima', 'Verdana', 'Microsoft Yahei', sans-serif;
+         overflow: hidden;
+         width:90%;
+         margin:3px 15px;
+         height:70px;
+         font-weight: bold;
+     }
+     .state-div{
+        margin:10px 10px;
+        padding:0 10px;
+     }
+     .operating-span{
+        margin-left:0px;
+        font-size:14px;
+     }
+     .content-div{
+       margin:-10px;
+     }
+     .pub-time{
+        margin-right:0px;
+        font: 15px/1.5 '\5FAE\8F6F\96C5\9ED1';
+     }
+     .page-item,.page-list{
+      list-style: none;
+      display: inline;
+      padding:0px;
+      margin:0px;
+     }
+     a.page-item-link{
+      display:inline-block;
+      width:50px;
+      color:#FF0000;
+      background-color:#81C08E;
+      font-size:15px;
+      text-align: center;
+     }
+
+     .content-div{
+      padding-left:8px;
+     }
+     .msg{
+      padding-left: 10px;
+      font:12px/1.8 'Optima', 'Verdana', 'Microsoft Yahei', sans-serif;
+     }
+     .info-desc-detail
+     {
+      height: 20px;
+      overflow: hidden;
+      padding: 5px 0px;
+      color: #999999;
+      font-size: 14px !important;
+      font-weight: bold;
+     }
+     .default-img{
+      width: 12px;
+      height:12px;
+      margin-left: 20px;
+      margin-right: 5px;
+     }

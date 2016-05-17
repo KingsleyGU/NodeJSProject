@@ -1,0 +1,111 @@
+
+import "GameBasic.proto";
+
+package game;
+
+option java_package = "com.orange.network.game.protocol.model";
+option java_outer_classname = "BBSProtos";
+
+message PBBBSUser {
+    required string userId = 1;
+    optional string nickName = 2;
+    optional string avatar =3;
+    optional bool gender = 4;
+}
+
+message PBBBSDraw{
+    repeated PBDrawAction drawActionList = 1; 
+    optional int32 version = 2 [default=0];         // draw data version
+    optional PBSize canvasSize = 3;                 // used after draw version 2.0
+}
+
+
+message PBBBSContent{
+    required int32 type = 1; //1 for text, 2 for image, 3 for draw
+    optional string text = 2;
+
+    //image content
+    optional string thumbImageUrl = 10;
+    optional string imageUrl = 11;
+
+    //draw content
+    optional string drawThumbUrl = 20;
+    optional string drawImageUrl  = 21;
+    optional PBBBSDraw drawData = 22;
+}
+
+
+message PBBBSReward
+{
+    required int32 bonus = 1;
+    required int32 status = 2;
+    optional PBBBSUser winner = 3;
+    optional int32 awardDate = 4;
+    optional string actionId = 5;
+}
+
+message PBBBSPost{
+    required string postId = 1;
+    required string boardId = 2;
+    required string appId = 3;
+    required int32 deviceType = 4;
+    required int32 replyCount = 5;
+    required int32 supportCount = 6;
+    required int32 createDate = 7;
+    required int32 modifyDate = 8;
+    required PBBBSUser createUser = 9;
+    required PBBBSContent content = 10;
+    optional PBBBSReward reward = 11;
+    optional int32 status = 12;
+    repeated PBBBSUser boardAdminList = 13; //unused
+    optional bool marked = 14;
+}
+
+message PBBBSPrivilege{
+    required string boardId = 1;
+    required int32 permission = 2;
+}
+
+message PBBBSActionSource{
+    required string postId = 1;
+    required string postUid = 2;
+
+    //if is reply
+    optional string actionId = 3;
+    optional string actionUid = 4;
+    optional string actionNick = 5;
+    optional int32 actionType = 6;
+    optional string briefText = 7;
+}
+
+message PBBBSAction{
+    required string actionId = 1;
+    required int32 type = 2;
+    required PBBBSUser createUser = 3;
+    required int32 deviceType = 5;
+    required int32 createDate = 6;
+    optional int32 replyCount = 7;
+
+    optional PBBBSContent content = 8;
+
+    //Source Action
+    optional PBBBSActionSource source = 9;
+
+}
+
+
+message PBBBSBoard{
+    required string boardId = 1;
+    required int32 type =2; //1 for parent board, 2 for sub board
+    required string name = 3;
+    required int32 actionCount = 5;
+    required int32 postCount = 6;
+
+    optional string icon = 4;
+    optional string parentBoardId = 7;
+    optional PBBBSPost lastPost = 8;
+    optional string desc = 9;
+    repeated PBBBSUser adminList = 10;
+}
+
+

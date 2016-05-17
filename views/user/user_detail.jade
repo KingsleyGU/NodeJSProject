@@ -1,0 +1,17 @@
+doctype 5
+html
+  head    
+    meta(name='keywords', content='小吉，画画，工具，社区，用户详情')
+    meta(name='description', content='小吉画画，小吉用户详情，小吉画画是目前国内最好的手机和平板电脑上的绘画工具和社区App，提供最为优秀的绘画工具，最富有人气的绘画互动娱乐社区，画画比赛，家族等强大功能')     
+    title   #{user.nickName}的主页
+    include ../includes/head
+    link(href='../css/user_page.css', rel='stylesheet', type='text/css') 
+  body
+    include ../includes/top_bar
+    include user_detail_main    
+    include ../includes/foot  
+    include ../includes/script
+    script(src="../js/user_page_json.js") 
+    script(src="../js/global/follow.js")
+
+

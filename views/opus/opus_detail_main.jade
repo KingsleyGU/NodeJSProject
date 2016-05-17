@@ -1,0 +1,167 @@
+script
+  var opusId = "#{feed.feedId}";
+  var userId = "#{feed.userId}";
+  var category = "#{feed.category}";
+  var CommentTypeNO = 0;
+  var CommentTypeGuess = 2;
+  var CommentTypeComment = 3;
+  var CommentTypeFlower = 6;
+  var CommentTypeTomato = 7;
+  var CommentTypeSave = 8;
+  var CommentTypeContestComment = 105;
+
+
+
+- var FeedTimesTypeMatch = 1;
+- var FeedTimesTypeGuess = 2;
+- var FeedTimesTypeCorrect = 3;
+- var FeedTimesTypeComment = 4;
+- var FeedTimesTypeFlower = 5;
+- var FeedTimesTypeTomato = 6;
+- var FeedTimesTypeSave = 7;
+- var FeedTimesTypeContestComment = 9;
+title 看看#{feed.nickName}用小吉画画创作的#{feed.opusWord}
+.ym-wrapper
+  .ym-wbox
+    .ym-grid    
+      .ym-g66.ym-gl
+        .detail-main
+            h2(style='text-align: center; margin-bottom:0px; ')
+              .title-link(style="font-weight:bold;") #{feed.opusWord}
+            img.original-image.center(src='#{feed.opusImage}' alt="小吉作品"+"#{feed.opusWord}")
+            .description-div
+              span.time-span.float-left #{dateUtils.getTimeDisplayString(feed.createDate)}
+              if feed.targetUserNickName   
+                span.sender-span.float-right 
+                   span 送给 
+                   span 
+                      a.sending_target(href="/user_detail/" + '#{feed.targetUserId}' target="_blank") #{feed.targetUserNickName}
+              br
+              .desc-span #{feed.opusDesc}
+              
+        .disscuss-div
+          #tabs(style="display:inline-block;border:0px solid #FFFFFF; width:100%;")
+           .tabs-title-div
+              ul
+                li.tab_li1
+                  a.tab1_link(href='#tabs-1') 评论(#{opusUtils.feedTimesWithFeedTimesType(FeedTimesTypeComment, feed.feedTimes)})
+                  span.inter-break |
+                li.tab_li2
+                  a.tab2_link(href='#tabs-2') 猜画(#{opusUtils.feedTimesWithFeedTimesType(FeedTimesTypeGuess, feed.feedTimes)})
+                  span.inter-break |
+                li.tab_li3
+                  a.tab3_link(href='#tabs-3') 鲜花(#{opusUtils.feedTimesWithFeedTimesType(FeedTimesTypeFlower, feed.feedTimes)})
+                  span.inter-break |
+                li.tab_li4
+                  a.tab4_link(href='#tabs-4' disabled="true") 收藏(#{opusUtils.feedTimesWithFeedTimesType(FeedTimesTypeSave, feed.feedTimes)})
+           .tabs-content-div     
+                #tabs-1
+                 .ym-g100
+                    .comment-loading-div.center 
+                       img.center(src='../img/loading.gif', alt='载入中')
+                    ul#comment-list
+                    .page-div.comment-page-div(style="display:none;")
+                       button.comment-more.page-link 更多>>
+
+                #tabs-2
+                  .guess-loading-div.center 
+                     img.center(src='../img/loading.gif', alt='载入中')
+                  ul#guess-list
+                  .page-div.guess-page-div(style="display:none;")
+                       button.guess-more.page-link 更多>>
+
+                #tabs-3
+                  .flower-loading-div.center 
+                     img.center(src='../img/loading.gif', alt='载入中')
+                  ul#flower-list
+                  .page-div.flower-page-div(style="display:none;")
+                       button.flower-more.page-link 更多>>
+                .text-div#text-div
+                    input.userId(type="hidden" name="create_uid" value='#{feed.userId}')
+                    input.category(type="hidden" name="category" value='#{feed.category}')
+                    input.opusWord(type="hidden" name="source_summary" value='#{feed.opusWord}')//will be changed
+                    input(class="source_summary" type="hidden" name="source_summary" )//will be changed
+                    input(class="source_id" type="hidden" name="source_id" )
+                    input(class="source_uid" type="hidden" name="source_uid" )
+                    input(class="source_nick" type="hidden" name="source_nick" )
+                    input(class="source_type" type="hidden" name="source_type")
+                    div(style="margin-bottom:10px;")
+                      label.comment-title 你的评论...
+                    textarea.comment-area(rows='4' cols='50' name='content' )
+                    if !login_user  
+                       a.text-send-link(href="/login?from=/opus/"+'#{feed.feedId}')  发送
+                    else
+                       button.text-send(type="submit") 发送 
+                .sending-div
+                    if !login_user  
+                       a.sending-flower-link(href="/login?from=/opus/"+'#{feed.feedId}') 
+                          img.flower-img(src="../img/send_flower.png" alt="送花")
+                    else
+                        button.sending-flower
+                          img.flower-img(src="../img/send_flower.png" alt="送花")
+                    if !login_user  
+                       a.storage-link(href="/login?from=/opus/"+'#{feed.feedId}') 
+                         img.storage-img(src="../img/storage.png" alt="收藏")
+                    else                          
+                        button.storage
+                          img.storage-img(src="../img/storage.png" alt="收藏")
+
+                    ul.discuss-list(style="display:none;")
+                      li.discuss-item(style="display:none;")
+                        hr
+                        a.icon-image-link(href='#', rel='XXX' target="_blank")
+                          img.icon-image(style="float:left;")
+                        .personal-information
+                          .person-time
+                            a.person-link(href='#' target="_blank") 冷色的月光
+                            .time-detail 2013-11-05 22:19:23 
+                          .comment-reply
+                            .userId(style="display:none;")
+                            .feedId(style="display:none;")
+                            .actionType(style="display:none;")
+                            .comment-content 
+                               span.reply-words(style="font-weight:bold;")
+                               span.content_detail
+                            a.modalbox(href='#text-div' onclick="changeInput(this)") 回复
+      .ym-g33.ym-gr
+        .workshop-div
+          span.workshop-title 
+              a.workshop-title-link(href="/user_detail/" + '#{feed.userId}' target="_blank")  #{feed.nickName}
+          div.owner-info
+            a.sub-cion-image-link(href="/user_detail/"+ '#{feed.userId}', rel='XXX' target="_blank")
+              img.sub-icon-image.float-left(src=src='#{user_manager.getUserAvatar(feed.avatar, feed.gender)}', alt='#{feed.nickName}'+'头像')
+
+            div.word-span
+              div#followers-number.achievement 
+              div#workpiece-number.achievement 
+          .gallery-div
+            .sub-workshop-title.center 更多用户作品
+            .workshop-loading-div 
+               img(src='../img/loading.gif', alt='载入中')
+            ul#workshop-list
+            ul.workshop-link-list(style="display:none;")
+              li.workshop-link-item(style="display:none;")
+                a.workshop-img-link(alt='作品图片链接', href='#' target="_blank")
+                  img.workshop-img.center( onload='load_size(this)')
+            .following-div 
+               if !login_user  
+                 a.follow-link(href="/login?from=/opus/"+'#{feed.feedId}') 关注
+               else
+                 button.follow-button 关注
+
+        .share-div
+          p(style='padding-left: 75px; padding-top: 20px; font-size: 18px; font-weight: bold; margin-bottom: 30px;') 将此作品分享到：
+          .jiathis_style_32x32
+            a.jiathis_button_qzone
+            a.jiathis_button_tsina
+            a.jiathis_button_tqq
+            a.jiathis_button_weixin
+            a.jiathis_button_renren
+            a.jiathis.jiathis_txt.jtico.jtico_jiathis(href='http://www.jiathis.com/share', target='_blank')
+            a.jiathis_counter_style
+          script(type='text/javascript', src='http://v3.jiathis.com/code/jia.js', charset='utf-8')
+        .QR_code_div#QR_code_div(style="position:absolute;")
+            img.code_img(src='../img/code.png' alt="二维码")
+            div.code_words.center 应用下载
+
+

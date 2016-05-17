@@ -1,0 +1,31 @@
+
+.main_div{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	margin-left: -330px;
+
+}
+.content_detail{
+	width: 550px;
+	padding: 30px 60px;
+	background-color: #f4f4f4;
+	margin-bottom: 90px;
+
+}
+.xiaoji-general,.xiaoji-drawing,.xiaoji_voice 
+{
+	margin-bottom: 30px;
+}
+.blue_span {
+	color: #29c7c9;
+}
+.red_span
+{
+   color:#f26623;
+}
+#foot-link_introduction
+{
+	color:#4acfb5;
+}

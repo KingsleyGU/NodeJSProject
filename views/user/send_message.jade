@@ -1,0 +1,58 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span9
+                .hero-unit
+                    form.form-horizontal(method='post', action='./doSendMessage')
+                        div.control-group
+                            div.controls
+                                h2  发送消息
+                        div.control-group
+                            label.control-label(for="message") 应用 
+                            div.controls
+                                select(name='app')
+                                   option draw
+                                   option zjh 
+                                   option old-dice
+                                   option new-dice
+                                   option little-gee 
+                                   option learn-draw
+                                   option pure-draw-free
+                                   option pure-draw
+                                   option photo-draw-free
+                                   option photo-draw
+                                   option call-back
+                                   option secure-sms 
+                                   option dream-avatar-free
+                                   option dream-avatar
+                                   option dream-lock-screen-free
+                                   option dream-lock-screen
+
+                        div.control-group
+                          - if (uid == null) 
+                            label.control-label(for="inputSendto") 发送给
+                            div.controls
+                                input#sendTo(type='text', placeHolder='用户ID', name='send_to')
+                          - else
+                            label.control-label(for="inputSendto") 发送给
+                            div.controls
+                                textarea#id(rows="1", name='send_to') #{uid}
+                        div.control-group
+                            label.control-label(for="message") 内容 
+                            div.controls
+                                    textarea(rows="8",placeHolder='发送的消息', name='message')
+                        div.control-group
+                            div.controls
+                                input.btn-danger(type='submit', value=' 发 送 ')   
+            
+    include ../includes/foot    
+    include ../includes/script    

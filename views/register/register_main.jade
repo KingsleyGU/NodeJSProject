@@ -1,0 +1,48 @@
+.ym-wrapper
+    .register-form-div
+        - var local_email_value = "请输入电子邮箱 ";
+        - var local_nick_value = "请输入昵称 ";
+        - var local_password_value = "请输入密码 ";
+        - var local_c_password_value = "请再一次确认密码 ";
+        - var p_type = "password"
+        - var cp_type = "password"
+
+        if email
+            local_email_value = email;
+        if nick
+            local_nick_value = nick
+        if password
+            local_password_value = password;
+            //p_type = "password"
+        if c_password
+            local_c_password_value = c_password;
+            //cp_type = "password"
+
+        h2.register-title 注册
+        form.login-form(method='post' action='/register')
+          div.parent_div 
+            input.user-input#user-input(type='text' name="email" value='#{local_email_value}')
+            br
+            .warning_div.warning-user-input(style="display:none;")
+          div.parent_div 
+            input.nickname#nickname(type='text' name="nick" value='#{local_nick_value}')
+            br
+            .warning_div.warning-nickname(style="display:none;")
+          div.parent_div 
+            input.first_psw-input.psw-input#reg_password(type='text' name="password" value='#{local_password_value}')
+            br
+            .warning_div.warning-first_psw(style="display:none;")
+          div.parent_div 
+            input.second_psw-input.psw-input#confirm-password(type='text' name="c_password" value='#{local_c_password_value}')
+            br
+            if message != undefine
+              .warning_get_div  #{message}
+            .warning_div.warning-confirm-password(style="display:none;")    
+          div.parent_div       
+            input.submit-input.reg-submit-input(type='submit', value='提交')
+            br
+            .warning_div.warning-reg-submit(style="display:none;") 所提供的用户信息不全，不能提交
+
+        .skip-div
+          span 已注册？
+          a.skip-link(href='/login') 登陆

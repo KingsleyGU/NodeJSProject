@@ -1,0 +1,63 @@
+
+doctype 5
+html
+  head    
+    include ../includes/head
+      
+  body
+    include ../includes/top_bar
+    .container-fluid
+          .row-fluid
+            .span2
+                include ../includes/left_bar            
+            .span9
+                .hero-unit
+                    form.form-horizontal(method='post', action='./doCharge')
+                        div.control-group
+                            div.controls
+                                h2  充值 
+                        div.control-group
+                            label.control-label(for='chargeType')
+                                用户ID 
+                            div.controls
+                              - if (uid == null)
+                                 textarea(rows="3",placeHolder='多个ID请以换行作为分隔', name='uids')
+                              - else 
+                                 textarea(rows="1", name='uids') #{uid}
+                        div.control-group
+                            label.control-label(for='chargeType')
+                                充值类型
+                            div.controls
+                              - if (type == null)
+                                label.checkbox.inline
+                                   input(type='checkbox', name='coin')
+                                   金币
+                                label.checkbox.inline
+                                   input#ingotCheckbox(type='checkbox', value='2', name='ingot')
+                                   元宝
+                              - else
+                                - if (type == 0) 
+                                    label.checkbox.inline
+                                       input#coinCheckbox(type='checkbox', value='1', checked="checked", name='coin')
+                                       金币
+                                    label.checkbox.inline
+                                       input#ingotCheckbox(type='checkbox', value='2', name='ingot')
+                                       元宝
+                                - else
+                                    label.checkbox.inline
+                                       input#coinCheckbox(type='checkbox', value='1', name='coin')
+                                       金币
+                                    label.checkbox.inline
+                                       input#ingotCheckbox(type='checkbox', value='2', checked="checked", name='ingot')
+                                       元宝
+                        div.control-group
+                            label.control-label(for='inputAmount')
+                                充值数额
+                            div.controls
+                                input#inputAmount(type='text', name='amount', placeHolder='数额(个)')
+                        div.control-group
+                            div.controls
+                                input.btn-danger(type='submit', value=' 充 值 ')   
+            
+    include ../includes/foot    
+    include ../includes/script    
